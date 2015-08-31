@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>infinitescroll</title>
-    <link rel="stylesheet" href="{{ static_url("css/reset.css") }}">
-    <link rel="stylesheet" href="{{ static_url("css/waterfall.css") }}">
+    <link rel="stylesheet" href="${ static_url("css/reset.css") }">
+    <link rel="stylesheet" href="${ static_url("css/reset.css") }">
+    <link rel="stylesheet" href="${ static_url("css/waterfall.css") }">
 </head>
 <body>
 <div id="header">
@@ -12,15 +13,19 @@
 </div>
 <div id="container"></div>
 <script type="text/x-handlebars-template" id="waterfall-tpl">
-{{!#result}}
+
+<%text>
+{{#result}}
     <div class="item">
-        <img src="{{!image}}" width="{{!width}}" height="{{!height}}" />
+        <img src="{{image}}" width="{{width}}" height="{{height}}" />
     </div>
-{{!/result}}
+{{/result}}
+</%text>
+
 </script>
-<script src="{{ static_url("js/libs/jquery/jquery.js") }}"></script>
-<script src="{{ static_url("js/libs/handlebars/handlebars.js") }}"></script>
-<script src="{{ static_url("js/waterfall.min.js") }}"></script>
+<script src="${ static_url("js/libs/jquery/jquery.js") }"></script>
+<script src="${ static_url("js/libs/handlebars/handlebars.js") }"></script>
+<script src="${ static_url("js/waterfall.min.js") }"></script>
 <script>
 $('#container').waterfall({
     itemCls: 'item',
