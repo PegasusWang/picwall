@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
+import _env
 import leancloud
 from leancloud import Object, Query, File
 from StringIO import StringIO
