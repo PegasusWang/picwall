@@ -54,6 +54,5 @@ class BaseHandler(tornado.web.RequestHandler):
         self.finish(self.render_string(filename, **kwargs))
 
     def write_json(self, data_dict):
-        """Write json data to client, self.write default call json_encode."""
-        self.set_header('Content-Type', 'application/json')
+        """if data is dict, self.write default write it as json data."""
         self.write(data_dict)
