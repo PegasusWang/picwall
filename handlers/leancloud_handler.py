@@ -9,7 +9,8 @@ import requests
 
 class LeanHandler(BaseHandler):
     def initialize(self):
-        self._leancloud_api = LeanCloudApi('Girls')
+        #self._leancloud_api = LeanCloudApi('Girls')
+        self._leancloud_api = LeanCloudApi('Jgiri')
 
     def get(self):
         print 'hehe'
@@ -23,7 +24,13 @@ class LeanHandler(BaseHandler):
             img_url = i.get('File').url
             img_info_url = img_url + '?imageInfo'
             try:
-                img_info = requests.get(img_info_url).json()
+                #img_info = requests.get(img_info_url).json()
+                r = requests.get(img_info_url,
+                                        headers={'Connection':'close'})
+                print '******'
+                img_info = r.json()
+                r.connection.close()
+                print 'close'
             except:
                 img_info = """{
                 "format":       "jpeg",
