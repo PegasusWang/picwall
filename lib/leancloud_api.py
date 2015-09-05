@@ -25,7 +25,7 @@ class LeanCloudApi(object):
 
     def get_skip_obj_list(self, skip_num=0, limit_num=20):
         query = self._query
-        query.descending('updatedAt')
+        query.descending('ID')
         query.skip(skip_num*limit_num)
         query.limit(limit_num)
         try:
