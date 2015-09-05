@@ -10,7 +10,8 @@ import requests
 class LeanHandler(BaseHandler):
     def initialize(self):
         #self._leancloud_api = LeanCloudApi('Girls')
-        self._leancloud_api = LeanCloudApi('Jgiri')
+        #self._leancloud_api = LeanCloudApi('Happylim')
+        self._leancloud_api = LeanCloudApi('Blendy99')
 
     def get(self):
         print 'hehe'
@@ -38,10 +39,12 @@ class LeanHandler(BaseHandler):
                 "height":       427,
                 "colorModel":   "ycbcr"
                 }"""
-            #width = img_info.get('width')
-            #height = img_info.get('height')
-            width = 192
-            height = 288
+            ori_width = img_info.get('width')
+            ori_height = img_info.get('height')
+
+            width = 480
+            height = width*ori_height/ori_width
+            img_url = img_url + '?imageMogr2/thumbnail/480x'
             each_res = {'image': img_url, 'width': width, 'height': height}
             result.append(each_res)
 

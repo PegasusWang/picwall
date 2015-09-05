@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 
 import _env
-import tornado.web
+from tornado.web import RequestHandler, HTTPError
 import mako.lookup
 import mako.template
 from mako import exceptions
@@ -21,7 +21,7 @@ MAKO_LOOK_UP = mako.lookup.TemplateLookup(
 )
 
 
-class BaseHandler(tornado.web.RequestHandler):
+class BaseHandler(RequestHandler):
     def initialize(self, lookup=MAKO_LOOK_UP):
         '''Set template lookup object, Defalut is MAKO_LOOK_UP'''
         self._lookup = lookup
@@ -56,3 +56,16 @@ class BaseHandler(tornado.web.RequestHandler):
     def write_json(self, data_dict):
         """if data is dict, self.write default write it as json data."""
         self.write(data_dict)
+
+    def write_error(self, status_code, **kwargs):
+        if status_code == 404:
+            self.render('404.html')
+        elif status_code == 500:
+            self.render('500.html')
+        else:
+            super(BaseHandler, self).write_error(status_code, **kwargs)
+
+
+class PageNotFoundHandler(BaseHandler):
+    def get(self):
+        raise HTTPError(404)
