@@ -5,6 +5,7 @@ from base import BaseHandler
 
 
 class MakoHandler(BaseHandler):
+
     def get(self):
         self.render("mako.html")
 
