@@ -2,36 +2,48 @@
 # -*- coding: utf-8 -*-
 
 import _env
-from lib.leancloud_api import LeanCloudApi
-from base import BaseHandler
 import requests
+from config import redis_config
+from base import BaseHandler
+from lib.leancloud_api import LeanCloudApi
+from redis import Redis
+from tornado.escape import json_encode
+
+r = Redis(host=redis_config.HOST, port=redis_config.PORT, db=0)
 
 
 class LeanHandler(BaseHandler):
     def initialize(self, class_name):
         self._leancloud_api = LeanCloudApi(class_name)
+        self._class_name = class_name
 
     def get(self, width=280):
         page = int(self.get_argument('page'))
-        print page
-        l = self._leancloud_api
-        obj_list = l.get_skip_obj_list(page-1)
+        res = r.hget(self._class_name, page)
+        if res:
+            print 'get from redis'
+            self.write_json(res)
+        else:
+            l = self._leancloud_api
 
-        result = []
-        for i in obj_list:
+            obj_list = l.get_skip_obj_list(page-1)
 
-            img_url = i.get('File').url
-            img_url = img_url + '?imageMogr2/thumbnail/%sx' % width
-            ori_width = i.get('width')
-            ori_height = i.get('height')
-            height = width*ori_height/ori_width
+            result = []
+            for i in obj_list:
 
-            each_res = {'image': img_url, 'width': width, 'height': height}
+                img_url = i.get('File').url
+                img_url = img_url + '?imageMogr2/thumbnail/%sx' % width
+                ori_width = i.get('width')
+                ori_height = i.get('height')
+                height = width*ori_height/ori_width
 
-            result.append(each_res)
+                each_res = {'image': img_url, 'width': width, 'height': height}
 
-        res = {'total': 20, 'result': result}
-        self.write_json(res)
+                result.append(each_res)
+
+            res = {'total': 20, 'result': result}
+            r.hset(self._class_name, page, json_encode(res))
+            self.write_json(res)
 
 
 '''
