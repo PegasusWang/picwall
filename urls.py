@@ -7,7 +7,8 @@ from handlers import mako_test
 from handlers import leancloud_handler
 from tornado.web import url
 
-class_name = 'Lolgifru'
+#class_name = 'Jgiri'
+class_name = 'Lovelyasians'
 
 url_patterns = [
     url(r'/mako/?', mako_test.MakoHandler),

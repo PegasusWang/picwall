@@ -11,7 +11,7 @@ class LeanHandler(BaseHandler):
     def initialize(self, class_name):
         self._leancloud_api = LeanCloudApi(class_name)
 
-    def get(self, width=480):
+    def get(self, width=280):
         page = int(self.get_argument('page'))
         print page
         l = self._leancloud_api
@@ -19,7 +19,6 @@ class LeanHandler(BaseHandler):
 
         result = []
         for i in obj_list:
-            width = 480
 
             img_url = i.get('File').url
             img_url = img_url + '?imageMogr2/thumbnail/%sx' % width
