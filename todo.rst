@@ -6,6 +6,7 @@ todo:
 速度优化：
 -leancloud查询使用include限定字段优化.
 -异步查询。
+**使用tornado-redis异步查询redis**,需要一次行初始化的放在Application里边，不要放在handler类里。
 -redis缓存。hset classname page queryresult
 （定时更新脚本,限定每个类页面数，计算占用空间)
 -nginx处理静态文件。
@@ -24,5 +25,9 @@ todo:
 -有没有死链。是否带不带后/的域名都是可以访问的.
 -404和500界面能用吗?
 
+
+测试：
+redis速度测试。空间占用问题
+curl爬虫是否容易
 
 bjfu 19740303 123456

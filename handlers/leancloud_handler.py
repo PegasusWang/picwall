@@ -9,11 +9,13 @@ from lib.leancloud_api import LeanCloudApi
 from redis import Redis
 from tornado.escape import json_encode
 
+# todo: 在Application __init__里边初始化redis客户端，和leancloud_api
 r = Redis(host=redis_config.HOST, port=redis_config.PORT, db=0)
 
 
 class LeanHandler(BaseHandler):
     def initialize(self, class_name):
+        print 'initialize'
         self._leancloud_api = LeanCloudApi(class_name)
         self._class_name = class_name
 
@@ -89,4 +91,42 @@ class LeanHandler(BaseHandler):
 
         res = {'total': 20, 'result': result}
         self.write_json(res)
+'''
+
+
+'''
+ I have experience using tornadoredis, an async redis client, and I
+haven't had any problems with it. Works great so far. Here's an
+example usage for a WebSocket server:
+
+import tornado.ioloop
+import tornado.web
+import tornado.websocket
+import tornado.gen
+import tornadoredis
+
+class Application(tornado.web.Application):
+    def __init__(self):
+        self.trdb = tornadoredis.Client()
+        self.trdb.connect()
+        handlers = [
+            (r"/", MyHandler),
+        ]
+        tornado.web.Application.__init__(self, handlers, **settings)
+
+
+class MyHandler(tornado.websocket.WebSocketHandler):
+    ...
+    @tornado.web.anyschronous
+    @tornado.gen.engine
+    def on_message(self, message):
+        yeild tornado.gen.Task(self.application.trdb.lpush, 'messages', message)
+
+
+That stripped down example will return right away, will not wait for
+the lpush to complete.
+
+Hope that helps.
+Nick
+
 '''
