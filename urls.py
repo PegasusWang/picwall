@@ -9,6 +9,8 @@ from tornado.web import url
 
 #class_name = 'Jgiri'
 class_name = 'Lovelyasians'
+#class_name = 'Tychoon'
+
 
 url_patterns = [
     url(r'/mako/?', mako_test.MakoHandler),

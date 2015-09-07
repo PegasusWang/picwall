@@ -5,6 +5,7 @@ import _env
 import requests
 from config import redis_config
 from base import BaseHandler
+from tornado.web import RequestHandler
 from lib.leancloud_api import LeanCloudApi
 from redis import Redis
 from tornado.escape import json_encode
@@ -13,18 +14,25 @@ from tornado.escape import json_encode
 r = Redis(host=redis_config.HOST, port=redis_config.PORT, db=0)
 
 
-class LeanHandler(BaseHandler):
+class LeanHandler(RequestHandler):
     def initialize(self, class_name):
         print 'initialize'
         self._leancloud_api = LeanCloudApi(class_name)
         self._class_name = class_name
 
     def get(self, width=280):
-        page = int(self.get_argument('page'))
-        res = r.hget(self._class_name, page)
+        try:
+            page = int(self.get_argument('page'))
+        except:
+            page = 1
+        try:
+            res = r.hget(self._class_name, page)
+        except:
+            res = ''
         if res:
             print 'get from redis'
-            self.write_json(res)
+            print 'len', len(res)
+            self.write(res)
         else:
             l = self._leancloud_api
 
@@ -44,8 +52,11 @@ class LeanHandler(BaseHandler):
                 result.append(each_res)
 
             res = {'total': 20, 'result': result}
-            r.hset(self._class_name, page, json_encode(res))
-            self.write_json(res)
+            try:
+                r.hset(self._class_name, page, json_encode(res))
+            except:
+                pass
+            self.write(res)
 
 
 '''

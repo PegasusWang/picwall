@@ -1,7 +1,5 @@
+bjfu 19740303 123456
 1.把width作为参数传入，使用户自己控制。用脚本控制item和col宽度。
-
-todo:
-在leancloud的查询参数加上请求的类名字，从而实现不同类的查询
 
 速度优化：
 -leancloud查询使用include限定字段优化.
@@ -30,4 +28,12 @@ todo:
 redis速度测试。空间占用问题
 curl爬虫是否容易
 
-bjfu 19740303 123456
+todo:
+测试不用redis和用redis缓存的效率。记录。redis快100倍左右,request per query。
+len(query) == 2436, 100000条数据大概232.3MB
+测试异步redis和同步redis的效率。
+在leancloud的查询参数加上请求的类名字，从而实现不同类的查询
+把初始化放到Applicaitoin上
+改用一步的redis实现
+#debug下
+修改base页面,把出错信息返回到web页面

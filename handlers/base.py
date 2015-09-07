@@ -47,7 +47,7 @@ class BaseHandler(RequestHandler):
             return template.render(**env_kwargs)
         except:
             # exception handler
-            print exceptions.html_error_template().render()
+            return exceptions.html_error_template().render()
             # pass
 
     def render(self, filename, **kwargs):
@@ -68,4 +68,5 @@ class BaseHandler(RequestHandler):
 
 class PageNotFoundHandler(BaseHandler):
     def get(self):
+        # then call write_error
         raise HTTPError(404)
