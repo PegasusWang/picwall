@@ -7,12 +7,11 @@ from handlers import mako_test
 from handlers import leancloud_handler
 from tornado.web import url
 
-#class_name = 'Jgiri'
-class_name = 'Lovelyasians'
-#class_name = 'Tychoon'
+class_name = 'Girls'
 
 
 url_patterns = [
+    url(r'/', leancloud_handler.LeanHandler),
     url(r'/mako/?', mako_test.MakoHandler),
     url(r'/resize/?', mako_test.ResizeHandler),
     url(r'/tem/?', tem_test.TemHandler),

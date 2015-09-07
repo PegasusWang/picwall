@@ -31,8 +31,8 @@ curl爬虫是否容易
 todo:
 测试不用redis和用redis缓存的效率。记录。redis快100倍左右,request per query。
 len(query) == 2436, 100000条数据大概232.3MB
-测试异步redis和同步redis的效率。
-在leancloud的查询参数加上请求的类名字，从而实现不同类的查询
+测试异步redis和同步redis的效率。(tornado-redis效果并不好，hset。采用非异步方式。
+在leancloud的查询参数加上请求的名字，从而实现不同类的查询
 把初始化放到Applicaitoin上
 改用一步的redis实现
 #debug下

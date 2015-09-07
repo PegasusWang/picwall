@@ -3,3 +3,4 @@ leancloud-sdk
 pyopenssl
 mako
 redis
+tornado-redis
