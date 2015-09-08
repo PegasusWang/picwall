@@ -17,15 +17,17 @@ class LeanHandler(RequestHandler):
         self._class_name = class_name
 
     def get(self, width=280):
+        key = self._class_name + ':' + str(width)
         try:
             page = int(self.get_argument('page'))
         except:
             page = 1
         try:
-            res = self._redis.hget(self._class_name, page)
+            res = self._redis.hget(key, page)
         except:
             res = ''
         if res:
+            print 'get form redis', page
             self.write(res)
 
         else:
@@ -49,7 +51,6 @@ class LeanHandler(RequestHandler):
 
             res = {'total': 20, 'result': result}
             try:
-                key = self._class_name + ':' + str(width)
                 self._redis.hset(key, page, json_encode(res))
             except:
                 pass
