@@ -16,7 +16,7 @@ class LeanHandler(RequestHandler):
         self._leancloud_api = leancloud_db
         self._class_name = class_name
 
-    def get(self, width=280):
+    def get(self, width=340):
         key = self._class_name + ':' + str(width)
         try:
             page = int(self.get_argument('page'))
@@ -32,8 +32,9 @@ class LeanHandler(RequestHandler):
 
         else:
             l = self._leancloud_api
+            limit_num =30
 
-            obj_list = l.get_skip_obj_list(page-1)
+            obj_list = l.get_skip_obj_list(page-1, limit_num=limit_num)
 
             result = []
             for i in obj_list:
@@ -49,7 +50,7 @@ class LeanHandler(RequestHandler):
                 result.append(each_res)
                 # TODO: 错误检查，没有高和宽度的设置默认值
 
-            res = {'total': 20, 'result': result}
+            res = {'total': limit_num, 'result': result}
             try:
                 self._redis.hset(key, page, json_encode(res))
             except:
