@@ -13,7 +13,6 @@ class LeanHandler(RequestHandler):
         return self.application._redis
 
     def initialize(self, class_name, leancloud_db):
-        #self._leancloud_api = LeanCloudApi(class_name)
         self._leancloud_api = leancloud_db
         self._class_name = class_name
 
@@ -28,7 +27,6 @@ class LeanHandler(RequestHandler):
             res = ''
         if res:
             self.write(res)
-
 
         else:
             l = self._leancloud_api
@@ -47,10 +45,12 @@ class LeanHandler(RequestHandler):
                 each_res = {'image': img_url, 'width': width, 'height': height}
 
                 result.append(each_res)
+                # TODO: 错误检查，没有高和宽度的设置默认值
 
             res = {'total': 20, 'result': result}
             try:
-                self._redis.hset(self._class_name, page, json_encode(res))
+                key = self._class_name + ':' + str(width)
+                self._redis.hset(key, page, json_encode(res))
             except:
                 pass
             self.write(res)

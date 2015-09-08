@@ -35,15 +35,57 @@ class LeanCloudApi(object):
             traceback.print_exc()
             return []
 
+    def add_img_info(self, obj_id):
+        query = self._query
+        obj = query.get(obj_id)
+        img_url = obj.get('File').url
+        img_info_url = img_url + '?imageInfo'
+        r = LeanCloudApi.fetch_data(img_info_url)
+        if not r:
+            return
+        img_info = r.json()
+        width = img_info.get('width', None)
+        height = img_info.get('height', None)
+
+        try:
+            obj.set('height', height)
+            obj.set('width', width)
+            obj.save()
+        except:
+            time.sleep(1)
+            obj.set('height', height)
+            obj.set('width', width)
+            obj.save()
+
+    def get_recent_obj_list(self, num):
+        query = self._query
+        query.descending('ID')
+        query.limit(num)
+        try:
+            obj_list = query.find()
+            return obj_list
+        except:
+            time.sleep(2)
+            obj_list = query.find()
+            return obj_list or []
+
     def solve_all_class_obj(self, callback, skip_num=0, limit_num=500):
         """callback is a function that solve list of class object"""
         query = self._query
-        query.descending('updatedAt')
+        #query.descending('createdAt')
+        #query.less_than('ID', 1775)
+        query.descending('ID')
         query.skip(skip_num*limit_num)
         query.limit(limit_num)
-        obj_list = query.find()
+        try:
+            obj_list = query.find()
+        except:
+            time.sleep(2)
+            obj_list = query.find()
+            traceback.print_exc()
 
         callback(obj_list)
+
         if len(obj_list) >= limit_num:
             time.sleep(1)
             self.solve_all_class_obj(callback, skip_num+1, limit_num)
@@ -95,7 +137,7 @@ class LeanCloudApi(object):
     @staticmethod
     def fetch_data(url, retries=5):
         try:
-            data = requests.get(url, timeout=5).content
+            data = requests.get(url, timeout=5)
         except:
             if retries > 0:
                 print 'fetch...', retries, url
@@ -103,23 +145,29 @@ class LeanCloudApi(object):
                 return LeanCloudApi.fetch_data(url, retries-1)
             else:
                 print 'fetch failed', url
-                return ''
+                data = None
+                return data
         return data
 
-    def upload_file_by_url(self, filename, url):
+    def upload_file_by_url(self, filename, url, tag_list=None):
+        """tag_list is tag of string list"""
         data = LeanCloudApi.fetch_data(url)
         if not data:
             return
+        data = data.content
         f = File(filename, StringIO(data))
         img_file = self._class()
         img_file.set('File', f)
         img_file.set('filename', filename)
+        if tag_list:
+            img_file.set('tag_list', tag_list)
         try:
             img_file.save()
             print filename, '----uploaded----'
+            self.add_img_info(img_file.id)    # save img_info after save
         except:
             print 'save file failed', url
-            time.sleep(10)
+            time.sleep(5)
             return
 
     def upload_file(self, file_abspath):
@@ -134,6 +182,7 @@ class LeanCloudApi(object):
             tag_list = LeanCloudApi.get_tag_list(filename)
             img_file.set('tag_list', tag_list)
             img_file.save()
+            self.add_img_info(img_file.id)    # save img_info after save
 
     @staticmethod
     def is_img_file(filename):

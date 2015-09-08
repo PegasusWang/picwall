@@ -4,3 +4,5 @@ pyopenssl
 mako
 redis
 tornado-redis
+simplejson
+requests
