@@ -23,6 +23,8 @@ bjfu 19740303 123456
 -有没有死链。是否带不带后/的域名都是可以访问的.
 -404和500界面能用吗?
 
+部署：
+可能需要扩大文件描述符打开数量限制。
 
 测试：
 redis速度测试。空间占用问题
@@ -33,7 +35,10 @@ todo:
 len(query) == 2436, 100000条数据大概232.3MB
 测试异步redis和同步redis的效率。(tornado-redis效果并不好，hset。采用非异步方式。
 在leancloud的查询参数加上请求的名字，从而实现不同类的查询
-把初始化放到Applicaitoin上
+把初始化放到Applicaitoin上, redis放在app上，leancloudapi还是放在(待定)
 改用一步的redis实现
-#debug下
-修改base页面,把出错信息返回到web页面
+#debug下: 修改base页面,把出错信息返回到web页面, 上线后或许需要用500页面
+#容错处理：没有weight和height的情况会出错，（包括leancloud和redis的数据）
+    首先给leancloud没有高和宽度的图片默认的值，之后再缓存到redis里边。这样可以
+    保证leancloud数据完整后redis里的一定是完整的数据，不需要另行处理redis的。
+写定时脚本每天更新每个类的每个页面。和每次设置所有类前100张图片的高和宽度值。

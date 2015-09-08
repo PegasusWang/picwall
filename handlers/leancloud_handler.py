@@ -12,8 +12,9 @@ class LeanHandler(RequestHandler):
     def _redis(self):
         return self.application._redis
 
-    def initialize(self, class_name):
-        self._leancloud_api = LeanCloudApi(class_name)
+    def initialize(self, class_name, leancloud_db):
+        #self._leancloud_api = LeanCloudApi(class_name)
+        self._leancloud_api = leancloud_db
         self._class_name = class_name
 
     def get(self, width=280):
@@ -27,6 +28,7 @@ class LeanHandler(RequestHandler):
             res = ''
         if res:
             self.write(res)
+
 
         else:
             l = self._leancloud_api
