@@ -45,3 +45,10 @@ len(query) == 2436, 100000条数据大概232.3MB
 
 
 整理leancloud类的名单.py
+
+
+json请求加密测试：
+1.把page放在固定位置，字符串中间，用代码抠出来（js能被看到）
+2.redis存放hash-》page？如何构造page
+3.一张自己的hansh表格，用mako的语法取得
+4.仅仅多一个uuid
