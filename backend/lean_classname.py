@@ -13,13 +13,15 @@ GIRLS_CLASS_NAME = {
     'Gigachaoss': ['sexy', 'girls', 'japan', 'adult'],    # need check adult
     'Girl2chick': ['sexy', 'girls', 'japan', 'adult'],    # need check adult
     'Girls': ['sexy', 'girls', 'japan', 'korean'],
+
+    'Heypantyhose': ['woman', 'china', 'girls', 'sexy'],
     'Happylim': ['sexy', 'girls', 'china', 'adult'],    # need check adult
     'Hotcosplaychicks': ['sexy', 'cosplay'],
     'HotGirlsAsia': ['sexy', 'asia', 'hot'],
     'HotGirlsfc': ['sexy', 'japan', 'hot', 'korean'],
     'Idolmaniax': ['sexy', 'japan', 'hot', 'korean'],
     'Jgiri': ['sexy', 'beauty', 'japan', 'korean', 'china', 'girls'],
-    'Kawaiileg': ['leg', 'japan', 'sexy'],
+    'Kawaiileg': ['leg', 'japan', 'sexy', 'korean'],
 
     'Koreangirlshd': ['beauty', 'sexy', 'korean', 'girls', 'models'],
     'Kormodels': ['beauty', 'sexy', 'korean', 'girls', 'models'],
@@ -33,6 +35,8 @@ GIRLS_CLASS_NAME = {
     'Snsdpics': ['korean', 'lovely', 'girls', 'models'],
 
     'Sossex1': ['hot', 'japan', 'sexy', 'girls'],    # need check
+    'Sekkusu': ['hot', 'japan', 'korean', 'sexy', 'grils', 'adult'], # to check
+    'SexyLadyJapan': ['sexy', 'japan', 'lady'],
     'Touch45': ['hot', 'asian', 'sexy', 'girls'],    # need check
     'Visualangel': ['hot', 'korean', 'girls', 'star'],
 

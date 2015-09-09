@@ -10,7 +10,7 @@ from lib.leancloud_api import LeanCloudApi
 
 #class_name = 'Jgiri'
 #class_name = 'Tychoon'
-class_name = 'Test'
+class_name = 'Ganpukudou'
 leancloud_db = LeanCloudApi(class_name)
 
 
