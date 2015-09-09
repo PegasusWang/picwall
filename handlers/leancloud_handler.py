@@ -2,9 +2,12 @@
 # -*- coding: utf-8 -*-
 
 import _env
+import base64
 import random
+import time
 from tornado.web import RequestHandler
 from tornado.escape import json_encode
+from lib.encrypt_api import gen_uuid_32
 
 
 class LeanHandler(RequestHandler):
@@ -17,18 +20,21 @@ class LeanHandler(RequestHandler):
         self._class_name = class_name
 
     def get(self, width=340):
+        uuid_str = gen_uuid_32()
         key = self._class_name + ':' + str(width)
         try:
             page = int(self.get_argument('page'))
         except:
             page = 1
         try:
-            res = self._redis.hget(key, page)
+            res_str = self._redis.hget(key, page)
         except:
-            res = ''
-        if res:
+            res_str = ''
+        if res_str:
             print 'get form redis', page
-            self.write(res)
+            res_b64 = base64.standard_b64encode(res_str)
+            encrypt_str = uuid_str + res_b64 + uuid_str[::-1]
+            self.write(encrypt_str)
 
         else:
             l = self._leancloud_api
@@ -52,11 +58,16 @@ class LeanHandler(RequestHandler):
                 result.append(each_res)
 
             res = {'total': limit_num, 'result': result}
+            res_str = json_encode(res)
+
             try:
-                self._redis.hset(key, page, json_encode(res))
+                print len(res_str)
+                self._redis.hset(key, page, res_str)
             except:
                 pass
-            self.write(res)
+            res_b64 = base64.standard_b64encode(res_str)
+            encrypt_str = uuid_str + res_b64 + uuid_str[::-1]
+            self.write(encrypt_str)
 
 
 default_res =[

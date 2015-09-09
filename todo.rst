@@ -52,3 +52,5 @@ json请求加密测试：
 2.redis存放hash-》page？如何构造page
 3.一张自己的hansh表格，用mako的语法取得
 4.仅仅多一个uuid
+或者简单的将json用base64加密后，waterfall.js混淆处理.
+base64 + salt
