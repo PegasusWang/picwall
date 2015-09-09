@@ -476,7 +476,7 @@
                 headers: headers,
                 dataType: dataType,
                 success: function(data) {
-                    data = data.slice(32, data.length-32);
+                    data = data.slice(13, data.length-22);
                     data = MyEncrypt.decode(data);    // add decrypt
                     data = JSON.parse(data);
                     self._handleResponse(data, callback);

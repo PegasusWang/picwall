@@ -33,7 +33,7 @@ class LeanHandler(RequestHandler):
         if res_str:
             print 'get form redis', page
             res_b64 = base64.standard_b64encode(res_str)
-            encrypt_str = uuid_str + res_b64 + uuid_str[::-1]
+            encrypt_str = uuid_str[:13] + res_b64 + uuid_str[:22]
             self.write(encrypt_str)
 
         else:
@@ -66,7 +66,7 @@ class LeanHandler(RequestHandler):
             except:
                 pass
             res_b64 = base64.standard_b64encode(res_str)
-            encrypt_str = uuid_str + res_b64 + uuid_str[::-1]
+            encrypt_str = uuid_str[:13] + res_b64 + uuid_str[:22]
             self.write(encrypt_str)
 
 
