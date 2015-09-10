@@ -39,7 +39,7 @@ class LeanHandler(RequestHandler):
 
         else:
             l = self._leancloud_api
-            limit_num =30
+            limit_num = Img.LIMIT_NUM
 
             obj_list = l.get_skip_obj_list(page-1, limit_num=limit_num)
 

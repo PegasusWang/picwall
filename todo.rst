@@ -46,3 +46,5 @@ todo:
 把js代码写到一个单独的文件里边。参考其他组织方式。
 想办法设置三个参数
 
+运行redisupdate之前先运行update_leancloud
+如果是从redis取得数据的可以设置查询参数

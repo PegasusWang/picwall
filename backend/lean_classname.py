@@ -3,10 +3,8 @@
 
 # class name online picwall
 GIRLS_CLASS_NAME_PICWALL = {
-    'Adnis':  ['sexy', 'girls', 'adult'],    # need check adult
-    'Aoababofan': ['korean', 'girls', 'gif'],
-    'Bestofasiangirls': ['sexy', 'asian', 'girls'],
-    'Blendy99': ['sexy', 'girls', 'japan'],
+    'Girls': ['sexy', 'girls', 'japan', 'korean'],
+    'Jgiri': ['sexy', 'beauty', 'japan', 'korean', 'china', 'girls'],
 }
 
 GIRLS_CLASS_NAME = {

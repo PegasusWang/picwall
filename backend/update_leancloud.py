@@ -7,6 +7,7 @@ import lib.leancloud_api as leancloud_api
 import requests
 import time
 import lean_classname
+from config.img_config import Img
 try:
     import simplejson as json
 except ImportError:
@@ -29,66 +30,73 @@ def fetch_data(url, retries=5):
 
 
 def add_img_info(obj):
-        if obj.get('height') and obj.get('width'):  # skip obj has width
-            return
-        img_url = obj.get('File').url
-        img_info_url = img_url + '?imageInfo'
-        r = fetch_data(img_info_url)
+    if not obj:
+        return
+    if obj.get('height') and obj.get('width'):  # skip obj has width
+        print 'skip', obj.get('ID')
+        return
+    img_url = obj.get('File').url
+    img_info_url = img_url + '?imageInfo'
+    r = fetch_data(img_info_url)
 
-        if not r:
-            return
+    if not r:
+        return
 
-        img_info = r.json()
-        width = img_info.get('width', None)
-        height = img_info.get('height', None)
+    img_info = r.json()
+    width = img_info.get('width', None)
+    height = img_info.get('height', None)
 
-        try:
-            obj.set('height', height)
-            obj.set('width', width)
-            print 'saving info', obj.get('ID')
-            obj.save()
-        except:
-            time.sleep(1)
-            obj.set('height', height)
-            obj.set('width', width)
-            print 'saving info', obj.get('ID')
-            obj.save()
+    try:
+        obj.set('height', height)
+        obj.set('width', width)
+        print 'saving info', obj.get('ID')
+        obj.save()
+    except:
+        time.sleep(1)
+        obj.set('height', height)
+        obj.set('width', width)
+        print 'saving info', obj.get('ID')
+        obj.save()
 
 
 def update_obj_list(res_list):
     for i in res_list:
-        if i:
-            add_img_info(i)
+        add_img_info(i)
 
-NUM = 100    # num of each class imgs will update
+NUM = Img.UPDATE_NUM    # num of each class imgs will update
 
 
-def update_leancloud_class_list(class_type):
+def update_leancloud_class_list(class_type, num=NUM):
     classname_li = class_type + '_CLASS_NAME'
-    class_name_list = getattr(lean_classname, classname_li)
-    for class_name in class_name_list:
+    try:
+        class_name_list = getattr(lean_classname, classname_li)
+    except AttributeError:
+        return
+    for class_name in class_name_list.keys():
         l = leancloud_api.LeanCloudApi(class_name)
-        obj_list = l.get_recent_obj_list(NUM)
-        update_obj_list(obj_list)
+        l.solve_nums_class_obj(update_obj_list, num)
 
 
-def update_leancloud_class_list_picwall(class_type):
+def update_leancloud_class_list_picwall(class_type, num=NUM):
     classname_li = class_type + '_CLASS_NAME_PICWALL'
-    class_name_list = getattr(lean_classname, classname_li)
-    for class_name in class_name_list:
+    try:
+        class_name_list = getattr(lean_classname, classname_li)
+    except AttributeError:
+        return
+    for class_name in class_name_list.keys():
         l = leancloud_api.LeanCloudApi(class_name)
-        obj_list = l.get_recent_obj_list(NUM)
-        update_obj_list(obj_list)
+        l.solve_nums_class_obj(update_obj_list, num)
 
 
 def main():
     class_type_list = ['GIRLS', 'BOYS', 'GIFS']
     for each in class_type_list:
-        print each
+        print 'update_leancloud***', each, '****************'
         # update_leancloud_class_list(each)
         update_leancloud_class_list_picwall(each)
+        time.sleep(1)
 
 
 if __name__ == '__main__':
     main()
-    print '**********finish********'
+    print time.strftime('%Y-%m-%d %A %X %Z', time.localtime(time.time()))

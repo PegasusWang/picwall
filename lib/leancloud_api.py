@@ -23,7 +23,7 @@ class LeanCloudApi(object):
         self._class = Object.extend(class_name)
         self._query = Query(self._class)
 
-    def get_skip_obj_list(self, skip_num=0, limit_num=20):
+    def get_skip_obj_list(self, skip_num=0, limit_num=30):
         query = self._query
         query.descending('ID')
         query.skip(skip_num*limit_num)
@@ -69,11 +69,31 @@ class LeanCloudApi(object):
             obj_list = query.find()
             return obj_list or []
 
+    def solve_nums_class_obj(self, callback, nums, skip_num=0, limit_num=500):
+        """solve nums of class objs"""
+        query = self._query
+        query.descending('ID')
+        skip_total = skip_num * limit_num
+        query.skip(skip_total)
+
+        limit_num = min(nums, limit_num)
+        query.limit(limit_num)
+        try:
+            obj_list = query.find()
+        except:
+            time.sleep(2)
+            obj_list = query.find()
+            traceback.print_exc()
+
+        callback(obj_list)
+
+        if nums < skip_total:
+            time.sleep(1)
+            self.solve_nums_class_obj(callback, skip_num+1, limit_num)
+
     def solve_all_class_obj(self, callback, skip_num=0, limit_num=500):
         """callback is a function that solve list of class object"""
         query = self._query
-        #query.descending('createdAt')
-        #query.less_than('ID', 1775)
         query.descending('ID')
         query.skip(skip_num*limit_num)
         query.limit(limit_num)
