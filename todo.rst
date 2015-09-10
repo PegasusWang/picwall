@@ -1,14 +1,15 @@
 bjfu 19740303 123456
 1.把width作为参数传入，使用户自己控制。用脚本控制item和col宽度。
+2.设置大图版本和小图版本, 使用不同的url。
 
 速度优化：
 -leancloud查询使用include限定字段优化.
 -异步查询。
-**使用tornado-redis异步查询redis**,需要一次行初始化的放在Application里边，不要放在handler类里。
 -redis缓存。hset classname page queryresult
-（定时更新脚本,限定每个类页面数，计算占用空间)
+（定时更新脚本,限定每个类页面数，计算占用空间, redis设置conf)
 -nginx处理静态文件。
 -多进程启动tornado，配合nginx监听不同的端口。
+-supervisor控制进程.
 
 程序优化：
 -容错。什么时候用if判断，什么时候用try、catch，哪些地方会出现异常。哪些地方需要用if。存入redis的数据是否是有效的。
@@ -17,35 +18,27 @@ bjfu 19740303 123456
 
 
 用户优化：
--不同屏幕显示效果如何。
+-不同屏幕显示效果如何。手机版何时能上线.
 -有没有部分图片没有显示出来。
 -gif消耗大，考虑用缩略图。
 -有没有死链。是否带不带后/的域名都是可以访问的.
+-随意输入url会不会重定向?
 -404和500界面能用吗?
 
 部署：
-可能需要扩大文件描述符打开数量限制。
+可能需要扩大文件描述符打开数量限制。ulimit.
+#debug下: 修改base页面,把出错信息返回到web页面, 上线后或许需要用500页面
 
 测试：
 redis速度测试。空间占用问题
-curl爬虫是否容易
-
-todo:
-测试不用redis和用redis缓存的效率。记录。redis快100倍左右,request per query。
-len(query) == 2436, 100000条数据大概232.3MB
-测试异步redis和同步redis的效率。(tornado-redis效果并不好，hset。采用非异步方式。
-在leancloud的查询参数加上请求的名字，从而实现不同类的查询
-把初始化放到Applicaitoin上, redis放在app上，leancloudapi还是放在(待定)
-改用一步的redis实现
-#debug下: 修改base页面,把出错信息返回到web页面, 上线后或许需要用500页面
 #容错处理：没有weight和height的情况会出错，（包括leancloud和redis的数据）
     首先给leancloud没有高和宽度的图片默认的值，之后再缓存到redis里边。这样可以
     保证leancloud数据完整后redis里的一定是完整的数据，不需要另行处理redis的。
 写定时脚本每天更新每个类的每个页面查询redis。和每次设置所有类前100张图片的高和宽度值。
 
-
-整理leancloud类的名单.py
-
-
-
+定期工作：
+更新类名字.
 图片筛选测试：只有长度和宽度大于特定的才要.是在handle还是用脚本跑
+
+todo:
+新建一个App，把之前类里的映射过去，按照规划分类。

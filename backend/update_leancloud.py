@@ -29,6 +29,8 @@ def fetch_data(url, retries=5):
 
 
 def add_img_info(obj):
+        if obj.get('height') and obj.get('width'):  # skip obj has width
+            return
         img_url = obj.get('File').url
         img_info_url = img_url + '?imageInfo'
         r = fetch_data(img_info_url)
