@@ -2,20 +2,22 @@
 # -*- coding:utf-8 -*-
 
 """
-update redis query string of all leancloud class when class save new img.
+update redis query string of all leancloud class, run every 24 hours.
 hset class_name:width page_num query_json_string.
 """
 
 import _env
 import lean_classname
 from config import redis_config
+from config.img_config import Img
 from redis import Redis
 from lib.leancloud_api import LeanCloudApi
 from tornado.escape import json_encode
 
 r = Redis(redis_config.HOST, redis_config.PORT)
-page_num = 50
-width = 280
+page_num = 100    # number of pages you want to cache query sting in redis
+width = Img.WIDTH
+print width
 
 
 def update_redis_by_class(class_name):
@@ -53,11 +55,21 @@ def update_redis_class_list(class_type):
         update_redis_by_class(class_name)
 
 
+def update_redis_class_list_picwall(class_type):
+    classname_li = class_type + '_CLASS_NAME_PICWALL'
+    class_name_list = getattr(lean_classname, classname_li)
+    for class_name in class_name_list:
+        print 'update redis:', class_name
+        update_redis_by_class(class_name)
+
+
 def main():
     class_type_list = ['GIRLS', 'BOYS', 'GIFS']
     for each in class_type_list:
         print each
-        update_redis_class_list(each)
+        # update_redis_class_list(each)
+        update_redis_class_list_picwall(each)
 
 if __name__ == '__main__':
-    main()
+    #main()
+    pass

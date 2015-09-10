@@ -72,11 +72,21 @@ def update_leancloud_class_list(class_type):
         update_obj_list(obj_list)
 
 
+def update_leancloud_class_list_picwall(class_type):
+    classname_li = class_type + '_CLASS_NAME_PICWALL'
+    class_name_list = getattr(lean_classname, classname_li)
+    for class_name in class_name_list:
+        l = leancloud_api.LeanCloudApi(class_name)
+        obj_list = l.get_recent_obj_list(NUM)
+        update_obj_list(obj_list)
+
+
 def main():
     class_type_list = ['GIRLS', 'BOYS', 'GIFS']
     for each in class_type_list:
         print each
-        update_leancloud_class_list(each)
+        # update_leancloud_class_list(each)
+        update_leancloud_class_list_picwall(each)
 
 
 if __name__ == '__main__':

@@ -8,6 +8,7 @@ import time
 from tornado.web import RequestHandler
 from tornado.escape import json_encode
 from lib.encrypt_api import gen_uuid_32
+from config.img_config import Img
 
 
 class LeanHandler(RequestHandler):
@@ -19,7 +20,7 @@ class LeanHandler(RequestHandler):
         self._leancloud_api = leancloud_db
         self._class_name = class_name
 
-    def get(self, width=340):
+    def get(self, width=Img.WIDTH):
         uuid_str = gen_uuid_32()
         key = self._class_name + ':' + str(width)
         try:

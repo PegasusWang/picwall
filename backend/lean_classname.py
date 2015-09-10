@@ -1,6 +1,14 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
+# class name online picwall
+GIRLS_CLASS_NAME_PICWALL = {
+    'Adnis':  ['sexy', 'girls', 'adult'],    # need check adult
+    'Aoababofan': ['korean', 'girls', 'gif'],
+    'Bestofasiangirls': ['sexy', 'asian', 'girls'],
+    'Blendy99': ['sexy', 'girls', 'japan'],
+}
+
 GIRLS_CLASS_NAME = {
     'Adnis':  ['sexy', 'girls', 'adult'],    # need check adult
     'Aoababofan': ['korean', 'girls', 'gif'],
@@ -54,15 +62,13 @@ GIFS_CLASS_NAME = {
     'TumblrForgifs': ['gif', 'funny'],
     'TumblrGifak': ['gif', 'funny'],
     'Tychoon': ['gif', 'funny'],
-
 }
+
 
 FASHION_CLASS_NAME = {
     'KoreanFashion': ['boys', 'fashion'],
 
 }
-
-
 
 
 BOYS_CLASS_NAME = {
