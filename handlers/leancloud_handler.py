@@ -32,7 +32,6 @@ class LeanHandler(RequestHandler):
         except:
             res_str = ''
         if res_str:
-            print 'get form redis', page
             res_b64 = base64.standard_b64encode(res_str)
             encrypt_str = uuid_str[:13] + res_b64 + uuid_str[:22]
             self.write(encrypt_str)
@@ -62,7 +61,6 @@ class LeanHandler(RequestHandler):
             res_str = json_encode(res)
 
             try:
-                print len(res_str)
                 self._redis.hset(key, page, res_str)
             except:
                 pass
