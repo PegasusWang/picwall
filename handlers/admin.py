@@ -5,16 +5,23 @@ import _env
 import base64
 import random
 import time
+from base import BaseHandler
 from tornado.web import RequestHandler
 from tornado.escape import json_encode
 from lib.encrypt_api import gen_uuid_32
 from lib.leancloud_api import LeanCloudApi
 from config.img_config import Img
 
-class LeanClassHandler(RequestHandler):
+class AdminHandler(BaseHandler):
     def get(self, class_name):
+        self.render('admin.html', class_name=class_name)
+
+
+class LeanClassHandler(RequestHandler):
+    def get(self):
         width = Img.WIDTH
         uuid_str = gen_uuid_32()
+        class_name = self.get_query_arguments('class')
         key = class_name + ':' + str(width)
         page = int(self.get_query_argument('page'))
 
