@@ -84,6 +84,7 @@ def update_leancloud_class_list_picwall(class_type, num=NUM):
     except AttributeError:
         return
     for class_name in class_name_list.keys():
+        print 'update leancloud class', class_name, '***********'
         l = leancloud_api.LeanCloudApi(class_name)
         l.solve_nums_class_obj(update_obj_list, num)
 
@@ -91,7 +92,7 @@ def update_leancloud_class_list_picwall(class_type, num=NUM):
 def main():
     class_type_list = ['GIRLS', 'BOYS', 'GIFS']
     for each in class_type_list:
-        print 'update_leancloud***', each, '****************'
+        print 'update_leancloud list', each, '****************'
         # update_leancloud_class_list(each)
         update_leancloud_class_list_picwall(each)
         time.sleep(1)

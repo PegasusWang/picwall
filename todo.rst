@@ -48,3 +48,4 @@ todo:
 
 运行redisupdate之前先运行update_leancloud
 如果是从redis取得数据的可以设置查询参数
+先浏览图片，再设置每个类的tag_list,中文和英文, 周末写后台页面和接口

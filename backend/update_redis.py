@@ -66,14 +66,14 @@ def update_redis_class_list_picwall(class_type):
     except AttributeError:
         return
     for class_name in class_name_list.keys():
-        print 'update redis:', class_name
+        print 'update redis class', class_name
         update_redis_by_class(class_name)
 
 
 def main():
     class_type_list = ['GIRLS', 'BOYS', 'GIFS']
     for each in class_type_list:
-        print 'update_redis***', each, '**************'
+        print 'update_redis list', each, '**************'
         # update_redis_class_list(each)
         update_redis_class_list_picwall(each)
         time.sleep(1)
