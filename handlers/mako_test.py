@@ -12,4 +12,4 @@ class MakoHandler(BaseHandler):
 
 class ResizeHandler(BaseHandler):
     def get(self):
-        self.render("resize.html")
+        self.render("/site/resize.html")

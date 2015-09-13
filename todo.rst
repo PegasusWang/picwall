@@ -49,3 +49,10 @@ todo:
 运行redisupdate之前先运行update_leancloud
 如果是从redis取得数据的可以设置查询参数
 先浏览图片，再设置每个类的tag_list,中文和英文, 周末写后台页面和接口
+
+
+declaretion:
+Dedicated to carrying the hottest online image compilation of Sexy Asian women for Entertainment purposes. In no way are we implying that any of the women on this site are actual 
+"doumi girls", it is just our name. We do not own images displayed on this site, and credit is due to the respectful owners of the photos. Photos will be taken down promptly if requested
+by the rightful owners (Ask me anything). Intended for mature audiences due to the erotic nature of some of the poses (PG-13).
+

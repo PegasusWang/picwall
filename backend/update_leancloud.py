@@ -43,6 +43,9 @@ def add_img_info(obj):
         return
 
     img_info = r.json()
+    if not img_info:
+        print img_info
+        print 'can not get img_info', obj.get('ID')
     width = img_info.get('width', None)
     height = img_info.get('height', None)
 
@@ -64,6 +67,7 @@ def update_obj_list(res_list):
         add_img_info(i)
 
 NUM = Img.UPDATE_NUM    # num of each class imgs will update
+print 'update nums', NUM
 
 
 def update_leancloud_class_list(class_type, num=NUM):

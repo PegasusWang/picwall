@@ -9,10 +9,7 @@ from mako import exceptions
 from os.path import join
 
 
-TEMPLATE_PATH_LIST = ['templates', 'templates/admin', 'templates/site']
-TEMPLATE_PATH = [
-    join(_env.PREFIX, path) for path in TEMPLATE_PATH_LIST
-]
+TEMPLATE_PATH = [join(_env.PREFIX, 'templates')]
 
 MAKO_LOOK_UP = mako.lookup.TemplateLookup(
     directories=TEMPLATE_PATH,

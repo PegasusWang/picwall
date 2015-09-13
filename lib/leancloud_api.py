@@ -76,8 +76,7 @@ class LeanCloudApi(object):
         skip_total = skip_num * limit_num
         query.skip(skip_total)
 
-        limit_num = min(nums, limit_num)
-        query.limit(limit_num)
+        query.limit(min(nums, limit_num))
         try:
             obj_list = query.find()
         except:
@@ -87,9 +86,9 @@ class LeanCloudApi(object):
 
         callback(obj_list)
 
-        if nums < skip_total:
+        if nums > (skip_total+limit_num):
             time.sleep(1)
-            self.solve_nums_class_obj(callback, skip_num+1, limit_num)
+            self.solve_nums_class_obj(callback, nums, skip_num+1, limit_num)
 
     def solve_all_class_obj(self, callback, skip_num=0, limit_num=500):
         """callback is a function that solve list of class object"""

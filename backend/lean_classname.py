@@ -4,7 +4,6 @@
 # class name online picwall
 GIRLS_CLASS_NAME_PICWALL = {
     'Girls': ['sexy', 'girls', 'japan', 'korean'],
-    'Jgiri': ['sexy', 'beauty', 'japan', 'korean', 'china', 'girls'],
 }
 
 GIRLS_CLASS_NAME = {

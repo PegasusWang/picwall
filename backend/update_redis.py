@@ -28,6 +28,7 @@ def update_redis_by_class(class_name):
 
         result = []
         for i in obj_list:
+            print i.get('ID')
             img_url = i.get('File').url
             img_url = img_url + '?imageMogr2/thumbnail/%sx' % width
 
