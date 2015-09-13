@@ -3,17 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <title>图片墙</title>
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="${static_url("css/reset.css")}">
     <link rel="stylesheet" href="${static_url("css/waterfall.css")}">
+    <link href="${static_url("css/style.css")}" media="screen" rel="stylesheet" type="text/css" />
+    <link href="${static_url("css/iconic.css")}" media="screen" rel="stylesheet" type="text/css" />
     <script src="${static_url("js/libs/jquery/jquery.js")}"></script>
     <script src="${static_url("js/libs/handlebars/handlebars.js")}"></script>
     <script src="${static_url("js/libs/jquery.easing.js")}"></script>
     <script src="${static_url("js/waterfall.js")}"></script>
+    <script src="${static_url("js/prefix-free.js")}"></script>
 </head>
 
 <body>
 <div id="header">
-    <%block name="header"/>
+    <nav>
+        <ul class="menu">
+            <li><a href="#"><span class="iconic home"></span> Home</a></li>
+            <li><a href="#"><span class="iconic plus-alt"></span> About</a>
+            <ul>
+                <li><a href="#">Company History</a></li>
+                <li><a href="#">Meet the team</a></li>
+            </ul>
+            </li>
+            <li><a href="#"><span class="iconic magnifying-glass"></span> Services</a>
+            <ul>
+                <li><a href="#">Web Design</a></li>
+                <li><a href="#">App Development</a></li>
+                <li><a href="#">Email Campaigns</a></li>
+                <li><a href="#">Copyrighting</a></li>
+            </ul>
+            </li>
+            <li><a href="#"><span class="iconic map-pin"></span> Products</a>
+            <ul>
+                <li><a href="#">Widget One</a></li>
+                <li><a href="#">Widget Two</a></li>
+                <li><a href="#">Web App Three</a></li>
+                <li><a href="#">Web App Four</a></li>
+                <li><a href="#">Crazy Products</a></li>
+                <li><a href="#">iPhone Apps</a></li>
+            </ul>
+            </li>
+            <li><a href="#"><span class="iconic mail"></span> Contact</a>
+            <ul>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">Directions</a></li>
+            </ul>
+            </li>
+        </ul>
+        <div class="clearfix"></div>
+    </nav>
 </div>
 
 <%block name="waterfall"/>
