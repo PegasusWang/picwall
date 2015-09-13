@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>图片墙</title>
+    <link rel="stylesheet" href="${static_url("css/reset.css")}">
+    <link rel="stylesheet" href="${static_url("css/waterfall.css")}">
+    <script src="${static_url("js/libs/jquery/jquery.js")}"></script>
+    <script src="${static_url("js/libs/handlebars/handlebars.js")}"></script>
+    <script src="${static_url("js/libs/jquery.easing.js")}"></script>
+    <script src="${static_url("js/waterfall.js")}"></script>
+</head>
+
+<body>
+<div id="header">
+    <%block name="header"/>
+</div>
+
+<%block name="waterfall"/>
+
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-1245097-16']);
+_gaq.push(['_trackPageview']);
+_gaq.push(['_trackPageLoadTime']);
+(function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = 'https://ssl.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+</body>
+</html>

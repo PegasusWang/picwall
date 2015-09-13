@@ -1,59 +1,36 @@
-<!doctype html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <title>resize animate</title>
-    <link rel="stylesheet" href="${ static_url("css/reset.css") }">
-    <link rel="stylesheet" href="${ static_url("css/waterfall.css") }">
-</head>
-<body>
-<div id="header">
-    <h1>resize animate</h1>
-</div>
-<div id="container"></div>
+<%inherit file="/base/waterfall.html"/>
+<%block name="header">
+    infinite
+</%block>
 
-<script type="text/x-handlebars-template" id="waterfall-tpl">
-<%text>
-{{#result}}
-    <div class="item">
-        <img src="{{image}}" width="{{width}}" height="{{height}}" />
-    </div>
-{{/result}}
-</%text>
+<%block name="waterfall">
+    <div id="container"></div>
+    <script type="text/x-handlebars-template" id="waterfall-tpl">
+    <%text>
+    {{#result}}
+        <div class="item">
+            <img src="{{image}}" width="{{width}}" height="{{height}}" />
+        </div>
+    {{/result}}
+    </%text>
+    </script>
 
-</script>
-<script src="${ static_url("js/libs/jquery/jquery.js") }"></script>
-<script src="${ static_url("js/libs/handlebars/handlebars.js") }"></script>
-<script src="${ static_url("js/libs/jquery.easing.js") }"></script>
-<script src="${ static_url("js/waterfall.js") }"></script>
-<script>
-$('#container').waterfall({
-    itemCls: 'item',
-    colWidth: 360,
-    maxCol: 5,
-    gutterWidth: 15,
-    gutterHeight: 15,
-    checkImagesLoaded: false,
-    isAnimated: true,
-    isFadeIn: true,
-    dataType: 'text',
-    animationOptions: {
-    },
-    path: function(page) {
-        return 'data/data1.json?page=' + page;
-    }
-});
-</script>
-<script type="text/javascript">
-var _gaq = _gaq || [];
-_gaq.push(['_setAccount', 'UA-1245097-16']);
-_gaq.push(['_trackPageview']);
-_gaq.push(['_trackPageLoadTime']);
-(function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = 'https://ssl.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-})();
-</script>
-</body>
-</html>
+    <script>
+    $('#container').waterfall({
+        itemCls: 'item',
+        colWidth: 360,
+        maxCol: 4,
+        gutterWidth: 15,
+        gutterHeight: 15,
+        checkImagesLoaded: false,
+        isAnimated: true,
+        isFadeIn: true,
+        dataType: 'text',
+        animationOptions: {
+        },
+        path: function(page) {
+            return 'data/data1.json?page=' + page;
+        }
+    });
+    </script>
+</%block>

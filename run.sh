@@ -3,5 +3,5 @@
 PREFIX=$(cd "$(dirname "$0")"; pwd)
 cd $PREFIX
 
-rm ./_templates/*
+rm -r ./_templates/*
 ./app.py
