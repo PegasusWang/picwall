@@ -69,7 +69,7 @@ class LeanHandler(RequestHandler):
         self._leancloud_api = leancloud_db
         self._class_name = class_name
 
-    def get(self):
+    def get(self, class_name=None):
         width = Img.WIDTH
         uuid_str = gen_uuid_32()
         key = self._class_name + ':' + str(width)

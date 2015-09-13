@@ -18,10 +18,10 @@ class AdminHandler(BaseHandler):
 
 
 class LeanClassHandler(RequestHandler):
-    def get(self):
+    def get(self, class_name):
+        class_name = class_name.split('/')[0]
         width = Img.WIDTH
         uuid_str = gen_uuid_32()
-        class_name = self.get_query_arguments('class')
         key = class_name + ':' + str(width)
         page = int(self.get_query_argument('page'))
 

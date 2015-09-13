@@ -30,7 +30,7 @@
 $('#container').waterfall({
     itemCls: 'item',
     colWidth: 360,
-    maxCol: 5,
+    maxCol: 4,
     gutterWidth: 15,
     gutterHeight: 15,
     checkImagesLoaded: false,
@@ -40,7 +40,7 @@ $('#container').waterfall({
     animationOptions: {
     },
     path: function(page) {
-        return 'data/data1.json?class_name=${ class_name }page=' + page;
+    return '${class_name}/data1.json?page=' + page;
     }
 });
 </script>
