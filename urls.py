@@ -10,11 +10,11 @@ from handlers import site
 from tornado.web import url
 from lib.leancloud_api import LeanCloudApi
 
-#class_name = 'Girls'
+class_name = 'Girls'
 
 
 url_patterns = [
-    url(r'/', leancloud_handler.LeanHandler),
+    url(r'/?', mako_test.ResizeHandler),
 
     # admin
     url(r'/admin/(\w+)/?', admin.AdminHandler),
@@ -33,8 +33,8 @@ url_patterns = [
 
 
 
-    #url(r'(\/?\w*)/data/data1.json', leancloud_handler.LeanHandler,
-        #dict(class_name=class_name, leancloud_db=LeanCloudApi(class_name))),
+    url(r'(\/?\w*)/data/data1.json', leancloud_handler.LeanHandler,
+        dict(class_name=class_name, leancloud_db=LeanCloudApi(class_name))),
 
 
 
