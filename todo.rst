@@ -52,7 +52,9 @@ todo:
 
 
 declaretion:
-Dedicated to carrying the hottest online image compilation of Sexy Asian women for Entertainment purposes. In no way are we implying that any of the women on this site are actual 
+Dedicated to carrying the hottest online image compilation of Sexy Asian women for Entertainment purposes. In no way are we implying that any of the women on this site are actual
 "doumi girls", it is just our name. We do not own images displayed on this site, and credit is due to the respectful owners of the photos. Photos will be taken down promptly if requested
 by the rightful owners (Ask me anything). Intended for mature audiences due to the erotic nature of some of the poses (PG-13).
 
+匹配qq的正则
+[1-9][0-9]{4,}

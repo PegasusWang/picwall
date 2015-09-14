@@ -46,6 +46,8 @@ else:
 settings = {}
 settings['debug'] = DEPLOYMENT != DeploymentType.PRODUCTION or options.debug
 settings['static_path'] = STATIC_PATH
+"""cookie_secret can generaate by
+base64.b64encode(uuid.uuid4().bytes+uuid.uuid4().bytes)"""
 settings['cookie_secret'] = "your-cookie-secret"
 settings['xsrf_cookies'] = True
 settings['template_loader'] = tornado.template.Loader(TEMPLATE_PATH)

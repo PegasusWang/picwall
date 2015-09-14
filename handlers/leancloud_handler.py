@@ -16,7 +16,10 @@ class LeanClassHandler(RequestHandler):
         width = Img.WIDTH
         uuid_str = gen_uuid_32()
         key = class_name + ':' + str(width)
-        page = int(self.get_query_argument('page'))
+        try:
+            page = int(self.get_query_argument('page'))
+        except:
+            page = 1
 
         try:
             res_str = self._redis.hget(key, page)
@@ -73,7 +76,10 @@ class LeanHandler(RequestHandler):
         width = Img.WIDTH
         uuid_str = gen_uuid_32()
         key = self._class_name + ':' + str(width)
-        page = int(self.get_query_argument('page'))
+        try:
+            page = int(self.get_query_argument('page'))
+        except:
+            page = 1
 
         try:
             res_str = self._redis.hget(key, page)
