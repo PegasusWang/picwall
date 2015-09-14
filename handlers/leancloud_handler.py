@@ -12,10 +12,18 @@ from lib.leancloud_api import LeanCloudApi
 from config.img_config import Img
 
 class LeanClassHandler(RequestHandler):
-    def get(self, class_name):
+    @property
+    def _redis(self):
+        return self.application._redis
+
+    def get(self, tag=None, class_name='Girls'):
+        class_name = class_name.split('/')[0]
+        print 'tag', tag
+        print 'class_name', class_name
         width = Img.WIDTH
         uuid_str = gen_uuid_32()
         key = class_name + ':' + str(width)
+        print key
         try:
             page = int(self.get_query_argument('page'))
         except:
@@ -28,6 +36,7 @@ class LeanClassHandler(RequestHandler):
         if res_str:
             res_b64 = base64.standard_b64encode(res_str)
             encrypt_str = uuid_str[:13] + res_b64 + uuid_str[:22]
+            print 'from redis', page
             self.write(encrypt_str)
 
         else:
