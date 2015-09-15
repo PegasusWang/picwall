@@ -58,3 +58,4 @@ by the rightful owners (Ask me anything). Intended for mature audiences due to t
 
 匹配qq的正则
 [1-9][0-9]{4,}
+配置好redis内存
