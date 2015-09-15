@@ -18,12 +18,9 @@ class LeanClassHandler(RequestHandler):
 
     def get(self, tag=None, class_name='Girls'):
         class_name = class_name.split('/')[0]
-        print 'tag', tag
-        print 'class_name', class_name
         width = Img.WIDTH
         uuid_str = gen_uuid_32()
         key = class_name + ':' + str(width)
-        print key
         try:
             page = int(self.get_query_argument('page'))
         except:

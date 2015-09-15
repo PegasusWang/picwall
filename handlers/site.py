@@ -5,14 +5,30 @@ from base import BaseHandler
 from tornado.web import addslash
 
 tag_to_class = {
-    'sexy': 'Sexy',
-    'cute': 'Cute',
-    'beauty': 'Beauty',
-    'japan': 'Japan',
-    'korean': 'Korean',
-    'china': 'China',
-    'leg': 'Leg',
+    # girls
+    'girls-sexy': 'Sexy',
+    'girls-cute': 'Cute',
+    'girls-beauty': 'Beauty',
+    'girls-japan': 'Japan',
+    'girls-korean': 'Korean',
+    'girls-china': 'China',
+    'girls-leg': 'Leg',
+    'girls-cos': 'Cos',
+    'girls-gif': 'GirlsGif',
+
+    # boys
+    'boys-korean': 'Boys',
+
+    # gif
+    'gifs-funny': 'GifsFunny',
+    'gifs-kuso': 'GifKuso',
+    'gifs-other': 'GifsOther',
+    'gifs-lol': 'GifsLol',
+
+    # animails
+    'animals-catdog': 'AnimalsCatdog',
 }
+
 
 
 class SiteHandler(BaseHandler):
