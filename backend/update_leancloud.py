@@ -94,7 +94,7 @@ def update_leancloud_class_list_picwall(class_type, num=NUM):
 
 
 def main():
-    class_type_list = ['GIRLS', 'BOYS', 'GIFS']
+    class_type_list = ['GIRLS', 'BOYS', 'GIFS', 'ANIMALS']
     for each in class_type_list:
         print 'update_leancloud list', each, '****************'
         # update_leancloud_class_list(each)

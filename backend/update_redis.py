@@ -72,7 +72,7 @@ def update_redis_class_list_picwall(class_type):
 
 
 def main():
-    class_type_list = ['GIRLS', 'BOYS', 'GIFS']
+    class_type_list = ['GIRLS', 'BOYS', 'GIFS', 'ANIMALS']
     for each in class_type_list:
         print 'update_redis list', each, '**************'
         # update_redis_class_list(each)
