@@ -24,6 +24,7 @@ def update_redis_by_class(class_name):
     """update redis query string of each leancloud class"""
     l = LeanCloudApi(class_name)
     for page in range(1, page_num+1):
+        time.sleep(0.3)
         obj_list = l.get_skip_obj_list(page-1, limit_num=Img.LIMIT_NUM)
         if not obj_list:
             return
@@ -74,7 +75,7 @@ def update_redis_class_list_picwall(class_type):
 
 
 def main():
-    class_type_list = ['GIRLS', 'BOYS', 'GIFS']
+    class_type_list = ['GIRLS', 'BOYS', 'GIFS', 'ANIMALS']
     for each in class_type_list:
         print 'update_redis list', each, '**************'
         # update_redis_class_list(each)

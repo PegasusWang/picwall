@@ -4,7 +4,41 @@
 # class name online picwall
 GIRLS_CLASS_NAME_PICWALL = {
     'Girls': ['sexy', 'girls', 'japan', 'korean'],
+    'Sexy': ['hot', 'sexy', 'girls'],
+    'Cute': ['cute', 'girs'],
+    'Beauty': ['beauty', 'girs'],
+    'China': ['sexy', 'girls', 'china'],
+    'Japan': ['sexy', 'girls', 'japan'],
+    'Korean': ['sexy', 'girls', 'korean'],
+    'GirlsGif': ['sexy', 'girls', 'korean'],
+    'Leg': ['leg', 'girls'],
+    'Cos': ['cosplay', 'girls', 'boobs'],
 }
+
+
+BOYS_CLASS_NAME_PICWALL = {
+    'Boys': ['boys', 'korean'],
+}
+
+
+GIFS_CLASS_NAME_PICWALL = {
+    'Gifs': ['gif', 'funny'],
+    'GifsFunny': ['gif', 'funny'],
+    'GifsOther': ['gif', 'funny'],
+    'GifsKuso': ['gif', 'funny', 'kuso'],
+    'GifsLol': ['gif', 'lol', 'kuso'],
+}
+
+
+ANIMALS_CLASS_NAME_PICWALL = {
+    'Animals':  ['animals', 'cute'],
+    'AnimalsCatdog': ['cats', 'dogs', 'funny', 'animals', 'cute'],
+}
+
+
+#########################################################################
+
+
 
 GIRLS_CLASS_NAME = {
     'Adnis':  ['sexy', 'girls', 'adult'],    # need check adult
@@ -71,8 +105,6 @@ FASHION_CLASS_NAME = {
 BOYS_CLASS_NAME = {
     'Allboysboys': ['korean', 'handsome'],
     'Lobbu': ['boys', 'korean boy', 'handsome', 'gif'],
-
-
 }
 
 

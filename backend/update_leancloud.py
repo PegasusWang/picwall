@@ -35,7 +35,11 @@ def add_img_info(obj):
     if obj.get('height') and obj.get('width'):  # skip obj has width
         print 'skip', obj.get('ID')
         return
+    if not obj.get('File'):
+        obj.destroy()
+        return
     img_url = obj.get('File').url
+
     img_info_url = img_url + '?imageInfo'
     r = fetch_data(img_info_url)
 
@@ -94,7 +98,7 @@ def update_leancloud_class_list_picwall(class_type, num=NUM):
 
 
 def main():
-    class_type_list = ['GIRLS', 'BOYS', 'GIFS']
+    class_type_list = ['GIRLS', 'BOYS', 'GIFS', 'ANIMALS']
     for each in class_type_list:
         print 'update_leancloud list', each, '****************'
         # update_leancloud_class_list(each)
