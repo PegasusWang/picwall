@@ -46,13 +46,13 @@ else:
 settings = {}
 settings['debug'] = DEPLOYMENT != DeploymentType.PRODUCTION or options.debug
 settings['static_path'] = STATIC_PATH
-"""cookie_secret can generaate by
+"""cookie_secret can generaate by:
 base64.b64encode(uuid.uuid4().bytes+uuid.uuid4().bytes)"""
 settings['cookie_secret'] = "your-cookie-secret"
 settings['xsrf_cookies'] = True
 settings['template_loader'] = tornado.template.Loader(TEMPLATE_PATH)
 
-SYSLOG_TAG = "boilerplate"
+SYSLOG_TAG = "picwall"
 SYSLOG_FACILITY = logging.handlers.SysLogHandler.LOG_LOCAL2
 
 # See PEP 391 and config for formatting help.  Each section of LOGGERS
@@ -62,7 +62,7 @@ SYSLOG_FACILITY = logging.handlers.SysLogHandler.LOG_LOCAL2
 # unless propagate: True is set.
 LOGGERS = {
    'loggers': {
-        'boilerplate': {},
+        'picwall': {},
     },
 }
 

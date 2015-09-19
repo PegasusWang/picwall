@@ -30,7 +30,6 @@ tag_to_class = {
 }
 
 
-
 class SiteHandler(BaseHandler):
     def initialize(self, class_name):
         super(SiteHandler, self).initialize()

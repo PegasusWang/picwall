@@ -2,17 +2,57 @@
 # -*- coding: utf-8 -*-
 
 import _env
-import base64
-import random
-import time
-from base import BaseHandler
-from tornado.web import RequestHandler
-from tornado.escape import json_encode
-from lib.encrypt_api import gen_uuid_32
-from lib.leancloud_api import LeanCloudApi
-from config.img_config import Img
+import leancloud
+from user import UserBaseHandler
+from tornado.web import authenticated
+from leancloud import User
+from config import leancloud_config
+leancloud.init(leancloud_config.LeanCloud.APP_ID,
+               master_key=leancloud_config.LeanCloud.APP_MASTER_KEY)
 
-class AdminHandler(BaseHandler):
+
+class AdminBaseHandler(UserBaseHandler):
+    pass
+
+
+class AdminMainHandler(AdminBaseHandler):
+    @authenticated
+    def get(self):
+        self.render('/admin/admin.html', user=self.current_user,
+                    class_name='Girls')
+
+
+class AdminLoginHandler(AdminBaseHandler):
+    def get(self):
+        self.render('/admin/login.html')
+
+    def post(self):
+        username = self.get_argument("username")
+        password = self.get_argument("password")
+        if "admin" == username:
+            try:
+                user = User()
+                user.login(username, password)
+            except leancloud.errors.LeanCloudError as e:
+                print(e.code, e.error)
+                self.redirect('/')
+
+            self.set_secure_cookie("user_id", user.id)
+            self.set_secure_cookie("username", username)
+            self.redirect('/admin/')
+        else:
+            self.redirect('/')
+
+
+class AdminLogoutHandler(AdminBaseHandler):
+    def get(self):
+        self.clear_cookie("user_id")
+        self.clear_cookie("username")
+        self.redirect(self.get_argument("next", "/"))
+
+
+'''
+class AdminHandler(AdminBaseHandler):
     def get(self, class_name):
         self.render('admin.html', class_name=class_name)
 
@@ -129,3 +169,4 @@ default_res =[
 {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/a73e9972f9915467.jpg?imageMogr2/thumbnail/340x", "height": 433}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/e7edeaf419b2852e.jpg?imageMogr2/thumbnail/340x", "height": 495}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/6fd4dc5c284fb45a.jpg?imageMogr2/thumbnail/340x", "height": 450}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/4c9494b3ef5ffba0.jpg?imageMogr2/thumbnail/340x", "height": 511}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/83a71b0253449a.jpg?imageMogr2/thumbnail/340x", "height": 191}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/41c8414d1c07b70.jpg?imageMogr2/thumbnail/340x", "height": 239}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/ca0b9e75887ba222.jpg?imageMogr2/thumbnail/340x", "height": 256}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/c8f1a2995abc7e9f.jpg?imageMogr2/thumbnail/340x", "height": 242}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/fea6b96612e5b381.jpg?imageMogr2/thumbnail/340x", "height": 510}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/3532c0c6d8ea4a.jpg?imageMogr2/thumbnail/340x", "height": 617}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/f2ec7cff4d75883.jpg?imageMogr2/thumbnail/340x", "height": 510}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/6c51237fdb0ee6.jpg?imageMogr2/thumbnail/340x", "height": 569}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/bd9da6382b8135d4.jpg?imageMogr2/thumbnail/340x", "height": 220}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/784015b980236f5.jpg?imageMogr2/thumbnail/340x", "height": 446}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/7fe15ed1a2543989.jpg?imageMogr2/thumbnail/340x", "height": 226}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/2771e4a5d26b30e6.jpg?imageMogr2/thumbnail/340x", "height": 510}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/e786339198653fb0.jpg?imageMogr2/thumbnail/340x", "height": 486}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/a7fc2d6b25a53609.jpg?imageMogr2/thumbnail/340x", "height": 510}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/5fceb5bfbcdbe26.jpg?imageMogr2/thumbnail/340x", "height": 510}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/30c2a3b8c7ee9dc.jpg?imageMogr2/thumbnail/340x", "height": 566}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/bf74e9d1ecf93d2c.jpg?imageMogr2/thumbnail/340x", "height": 510}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/951e43b53142368.jpg?imageMogr2/thumbnail/340x", "height": 510}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/2d42df54f97a356f.jpg?imageMogr2/thumbnail/340x", "height": 467}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/4cedd30918d8000.jpg?imageMogr2/thumbnail/340x", "height": 436}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/f525fe625b9c33dc.jpg?imageMogr2/thumbnail/340x", "height": 225}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/e4837efedf5f480.jpg?imageMogr2/thumbnail/340x", "height": 510}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/8b19feb8e92a251c.jpg?imageMogr2/thumbnail/340x", "height": 627}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/6613785557d95882.jpg?imageMogr2/thumbnail/340x", "height": 479}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/f8c568e7e06b79ab.jpg?imageMogr2/thumbnail/340x", "height": 240}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/8ac820d14b524b7.jpg?imageMogr2/thumbnail/340x", "height": 218},
 {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/be896f66d89af4bc.jpg?imageMogr2/thumbnail/340x", "height": 510}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/c97bde4975418af9.jpg?imageMogr2/thumbnail/340x", "height": 510}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/752746f3333121f2.jpg?imageMogr2/thumbnail/340x", "height": 510}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/55c05f14d71ab354.jpg?imageMogr2/thumbnail/340x", "height": 450}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/8a32586fef8daf15.jpg?imageMogr2/thumbnail/340x", "height": 242}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/594dcb9cba75b372.jpg?imageMogr2/thumbnail/340x", "height": 510}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/74e0ae91cec6909.jpg?imageMogr2/thumbnail/340x", "height": 510}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/c51c4b3faa1e8d3b.jpg?imageMogr2/thumbnail/340x", "height": 226}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/13c0f0f15ed26df7.jpg?imageMogr2/thumbnail/340x", "height": 448}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/8b0dcba577be211.jpg?imageMogr2/thumbnail/340x", "height": 524}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/def6af01956d846a.jpg?imageMogr2/thumbnail/340x", "height": 503}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/da2f205076938e6.jpg?imageMogr2/thumbnail/340x", "height": 510}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/684957ffe36e7d3c.jpg?imageMogr2/thumbnail/340x", "height": 512}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/60f183befadf84f0.jpg?imageMogr2/thumbnail/340x", "height": 453}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/37944c9465845cab.jpg?imageMogr2/thumbnail/340x", "height": 510}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/b89ee20d9568a490.jpg?imageMogr2/thumbnail/340x", "height": 523}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/cc6ef3506083197a.png?imageMogr2/thumbnail/340x", "height": 482}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/27936c722fcf8e2a.jpg?imageMogr2/thumbnail/340x", "height": 451}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/b576abd3e6d74273.jpg?imageMogr2/thumbnail/340x", "height": 510}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/a5376a78cac3a7.jpg?imageMogr2/thumbnail/340x", "height": 510}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/6ba2d11c1eb435c.jpg?imageMogr2/thumbnail/340x", "height": 222}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/16867eb42a9565.jpg?imageMogr2/thumbnail/340x", "height": 512}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/1571cbb5ccfbf367.jpg?imageMogr2/thumbnail/340x", "height": 479}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/652313fe16a0bbed.jpg?imageMogr2/thumbnail/340x", "height": 543}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/91f8615d37d912bf.jpg?imageMogr2/thumbnail/340x", "height": 472}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/dfd79721d6bf86.jpg?imageMogr2/thumbnail/340x", "height": 511}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/671ee3949267f27e.jpg?imageMogr2/thumbnail/340x", "height": 495}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/24d3d0ef49819bb1.jpg?imageMogr2/thumbnail/340x", "height": 484}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/9509d3d87e346feb.jpg?imageMogr2/thumbnail/340x", "height": 529}, {"width": 340, "image": "http://ac-0pdchyat.clouddn.com/71482a509184aafd.jpg?imageMogr2/thumbnail/340x", "height": 512},
 ]
+'''

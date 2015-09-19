@@ -2,11 +2,11 @@
 # -*- coding:utf-8 -*-
 
 from handlers import base
-from handlers import tem_test
 from handlers import mako_test
 from handlers import leancloud_handler
 from handlers import admin
 from handlers import site
+from handlers import user
 from tornado.web import url
 from lib.leancloud_api import LeanCloudApi
 
@@ -16,9 +16,17 @@ class_name = 'Girls'
 url_patterns = [
     url(r'/?', mako_test.ResizeHandler),
 
+    url(r'/user/?', user.UserMainHandler),
+    url(r'/user/login/?', user.UserLoginHandler),
+    url(r'/user/logout/?', user.UserLogoutHandler),
+    url(r'/user/register/?', user.UserRegisterHandler),
+
     # admin
-    url(r'/admin/(\w+)/?', admin.AdminHandler),
-    url(r'/admin/(\w+\/?\w+)/data.json', admin.LeanClassHandler),
+    url(r'/admin/?', admin.AdminMainHandler),
+    url(r'/admin/login/?', admin.AdminLoginHandler),
+
+    #url(r'/admin/(\w+)/?', admin.AdminHandler),
+    #url(r'/admin/(\w+\/?\w+)/data.json', admin.LeanClassHandler),
 
     # site boys
     url(r'/boys/?', site.SiteHandler, dict(class_name='Boys')),
@@ -39,8 +47,9 @@ url_patterns = [
 
 
     # leancloud
-    url(r'/(\w+\/?\w+)/(\w+)?/data.json', leancloud_handler.LeanClassHandler),
-    url(r'/(\w+\/?\w+-\w+)/(\w+)?/data.json', leancloud_handler.LeanClassHandler),
+    url(r'/([-\w+]+\/?)+/data.json', leancloud_handler.LeanClassHandler),
+    #url(r'/(\w+\/?\w+)/(\w+)?/data.json', leancloud_handler.LeanClassHandler),
+    #url(r'/(\w+\/?\w+-\w+)/(\w+)?/data.json', leancloud_handler.LeanClassHandler),
 
 
     #url(r'/mako/?', mako_test.MakoHandler),

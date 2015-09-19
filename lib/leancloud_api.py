@@ -18,8 +18,8 @@ import jieba
 class LeanCloudApi(object):
 
     def __init__(self, class_name):
-        leancloud.init(leancloud_config.LeanCloud.WeiboApp_APP_ID,
-                       master_key=leancloud_config.LeanCloud.WeiboApp_APP_MASTER_KEY)
+        leancloud.init(leancloud_config.LeanCloud.APP_ID,
+                       master_key=leancloud_config.LeanCloud.APP_MASTER_KEY)
         self._class = Object.extend(class_name)
         self._query = Query(self._class)
 

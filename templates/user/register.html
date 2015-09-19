@@ -1,0 +1,16 @@
+<html>
+    <head>
+        <title>请注册</title>
+    </head>
+
+    <body>
+        <form action="/user/register" method="POST">
+            ${xsrf_form_html()}
+            Username: <input type="text" name="username"/>
+            Password: <input type="password" name="password"/>
+            email: <input type="text" name="email"/>
+            <input type="submit" value="注册"/>
+        </form>
+    </body>
+</html>
+

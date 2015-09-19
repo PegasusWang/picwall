@@ -5,4 +5,5 @@
 *log
 .DS_Store
 *.conf
+*settings.py
 _templates/*

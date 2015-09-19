@@ -16,8 +16,8 @@ class LeanClassHandler(RequestHandler):
     def _redis(self):
         return self.application._redis
 
-    def get(self, tag=None, class_name='Girls'):
-        class_name = class_name.split('/')[0]
+    def get(self, *args):
+        class_name = args[-1]
         width = Img.WIDTH
         uuid_str = gen_uuid_32()
         key = class_name + ':' + str(width)
