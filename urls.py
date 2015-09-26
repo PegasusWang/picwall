@@ -14,7 +14,8 @@ class_name = 'Girls'
 
 
 url_patterns = [
-    url(r'/?', mako_test.ResizeHandler),
+    # url(r'/?', mako_test.ResizeHandler),
+    url(r'/?', site.SiteHandler, dict(class_name='Girls')),
 
     url(r'/user/?', user.UserMainHandler),
     url(r'/user/login/?', user.UserLoginHandler),
