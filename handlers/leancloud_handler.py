@@ -45,13 +45,14 @@ class LeanClassHandler(RequestHandler):
             result = []
             for i in obj_list:
 
+                img_ID = i.get('ID')
                 img_url = i.get('File').url
                 img_url = img_url + '?imageMogr2/thumbnail/%sx' % width
                 ori_width = i.get('width')
                 ori_height = i.get('height')
                 try:
                     height = width*ori_height/ori_width
-                    each_res = {'image': img_url, 'width': width, 'height': height}
+                    each_res = {'id': img_ID, 'image': img_url, 'width': width, 'height': height}
                 except TypeError:
                     each_res = random.choice(default_res)
 
@@ -105,13 +106,14 @@ class LeanHandler(RequestHandler):
             result = []
             for i in obj_list:
 
+                img_ID = i.get('ID')
                 img_url = i.get('File').url
                 img_url = img_url + '?imageMogr2/thumbnail/%sx' % width
                 ori_width = i.get('width')
                 ori_height = i.get('height')
                 try:
                     height = width*ori_height/ori_width
-                    each_res = {'image': img_url, 'width': width, 'height': height}
+                    each_res = {'id': img_ID, 'image': img_url, 'width': width, 'height': height}
                 except TypeError:
                     each_res = random.choice(default_res)
 
