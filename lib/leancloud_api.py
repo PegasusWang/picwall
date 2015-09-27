@@ -23,6 +23,12 @@ class LeanCloudApi(object):
         self._class = Object.extend(class_name)
         self._query = Query(self._class)
 
+    def del_by_ID(self, ID):
+        query = self._query
+        query.equal_to('ID', ID)
+        o = query.first()
+        o.destroy()
+
     def save_obj(self, obj_dict):
         c = self._class
         obj = c()

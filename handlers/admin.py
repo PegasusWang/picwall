@@ -19,6 +19,16 @@ class AdminMainHandler(AdminBaseHandler):
         self.render('/admin/admin.html', user=self.current_user,
                     class_name='Girls')
 
+class ImgDeleteHandler(AdminBaseHandler):
+    @authenticated
+    def post(self):
+        class_name = self.get_body_argument('class_name')
+        src = self.get_body_argument('src')
+        l =
+
+
+
+
 
 class AdminLoginHandler(AdminBaseHandler):
     def get(self):
