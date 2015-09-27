@@ -3,12 +3,10 @@
 
 import _env
 import leancloud
+import _leancloud_init
 from user import UserBaseHandler
 from tornado.web import authenticated
 from leancloud import User
-from config import leancloud_config
-leancloud.init(leancloud_config.LeanCloud.APP_ID,
-               master_key=leancloud_config.LeanCloud.APP_MASTER_KEY)
 
 
 class AdminBaseHandler(UserBaseHandler):
