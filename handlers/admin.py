@@ -4,30 +4,64 @@
 import _env
 import leancloud
 import _leancloud_init
-from user import UserBaseHandler
-from tornado.web import authenticated
+from base import BaseHandler
+from tornado.web import authenticated, addslash
 from leancloud import User
+from lib.leancloud_api import LeanCloudApi
+from tag_to_class import tag_to_class
 
 
-class AdminBaseHandler(UserBaseHandler):
-    pass
+class AdminBaseHandler(BaseHandler):
+    def get_current_user(self):
+        return self.get_secure_cookie('user_id')
+
+    def get_login_url(self):
+        return '/admin/login/'
 
 
 class AdminMainHandler(AdminBaseHandler):
     @authenticated
     def get(self):
+        if not self.current_user:
+            self.redirect('/admin/login/')
         self.render('/admin/admin.html', user=self.current_user,
                     class_name='Girls')
 
-class ImgDeleteHandler(AdminBaseHandler):
+
+class AdminSiteHandler(AdminBaseHandler):
+    def initialize(self, class_name):
+        super(AdminSiteHandler, self).initialize()
+        self._class_name = class_name
+
+    @authenticated
+    @addslash
+    def get(self):
+        self.render("/admin/adminsite.html", class_name=self._class_name)
+
+
+class AdminSiteTagHandler(AdminBaseHandler):
+    @authenticated
+    @addslash
+    def get(self, class_name):
+        self.render("/admin/adminsite.html",
+                    class_name=tag_to_class[class_name])
+
+
+class ImgDelHandler(AdminBaseHandler):
     @authenticated
     def post(self):
         class_name = self.get_body_argument('class_name')
-        src = self.get_body_argument('src')
-        l =
-
-
-
+        img_ID = self.get_body_argument('img_id')
+        l = LeanCloudApi(class_name)
+        try:
+            l.del_by_ID(int(img_ID))
+            d = {'msg': 'success', 'img_id': img_ID}
+            self.write(d)
+        except:
+            import traceback
+            traceback.print_exc()
+            d = {'msg': 'success', 'img_id': img_ID}
+            self.write(d)
 
 
 class AdminLoginHandler(AdminBaseHandler):
@@ -43,13 +77,13 @@ class AdminLoginHandler(AdminBaseHandler):
                 user.login(username, password)
             except leancloud.errors.LeanCloudError as e:
                 print(e.code, e.error)
-                self.redirect('/')
+                self.redirect('/admin/login/')
 
             self.set_secure_cookie("user_id", user.id)
             self.set_secure_cookie("username", username)
             self.redirect('/admin/')
         else:
-            self.redirect('/')
+            self.redirect('/admin/login/')
 
 
 class AdminLogoutHandler(AdminBaseHandler):

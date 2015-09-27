@@ -1,4 +1,4 @@
-<%inherit file="/base/waterfall.html"/>
+<%inherit file="/base/_admin.html"/>
 
 <%block name="title">
     <title>图片墙</title>
@@ -6,19 +6,16 @@
 
 <%block name="waterfall">
     <div id="container"></div>
-
-
     <script type="text/x-handlebars-template" id="waterfall-tpl">
     <%text>
     {{#result}}
         <div class="item">
-            <img src="{{image}}" width="{{width}}" height="{{height}}" />
+            <img id="{{id}}" src="{{image}}" width="{{width}}" height="{{height}}" />
             <input type="button" value="删除图片" onclick="deleteImg(this)"/>
         </div>
     {{/result}}
     </%text>
     </script>
-
 
     <script src="${static_url("js/libs/jquery/jquery.js")}"></script>
     <script src="${static_url("js/libs/handlebars/handlebars.js")}"></script>
@@ -30,45 +27,38 @@
         var r = document.cookie.match("\\b" + name + "=([^;]*)\\b");
         return r ? r[1] : undefined;
     }
+
     function deleteImg(obj) {
         var node = obj.parentNode;
         var imgNode = node.getElementsByTagName('img')
-        var imgSrc = imgNode[0].getAttribute('src');
+        var imgId = imgNode[0].getAttribute('id');
+        var _xsrf = getCookie("_xsrf");
+
+        $.ajax({
+            url: '/admin/img/solve',// 跳转到 action
+            data: {
+                '_xsrf': _xsrf,
+                'class_name': '${class_name}',
+                'img_id': imgId
+            },
+            type: 'post',
+            cache: false,
+            dataType: 'json',
+            success:function(data) {
+                if(data.msg =="success" ){
+                    //alert("修改成功! " + data.img_id);
+                } else {
+                    alert("删除失败，请重试! " + data.img_id);
+                }
+             },
+             error : function() {
+                  // view("异常！");
+                  alert("异常！");
+             }
+        });
     }
-
-    jQuery.postJSON = function(url, args, callback) {
-        args._xsrf = getCookie("_xsrf");
-        $.ajax({url: url, data: $.param(args), dataType: "text", type: "POST",
-            success: function(response) {
-                callback(eval("(" + response + ")"));
-            }});
-    };
-    //1.$.ajax带json数据的异步请求
-    $.ajax({
-        url: 'productManager_reverseUpdate',// 跳转到 action
-        data: {
-            'class_name': ${class_name},
-            'src': imgSrc
-        },
-        type: 'post',
-        cache: false,
-        dataType: 'json',
-        success:function(data) {
-            if(data.msg =="true" ){
-                // view("修改成功！");
-                alert("修改成功！");
-                //window.location.reload();
-            } else {
-                view(data.msg);
-            }
-         },
-         error : function() {
-              // view("异常！");
-              alert("异常！");
-         }
-    });
-
     </script>
+
 
     <script>
     $('#container').waterfall({
@@ -89,4 +79,3 @@
     });
     </script>
 </%block>
-

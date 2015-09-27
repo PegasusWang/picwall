@@ -25,9 +25,14 @@ class LeanCloudApi(object):
 
     def del_by_ID(self, ID):
         query = self._query
-        query.equal_to('ID', ID)
-        o = query.first()
-        o.destroy()
+        query.equal_to('ID', ID)    # todo ,not fount
+        try:
+            o = query.first()
+            o.destroy()
+            print('deleted success', ID)
+        except:
+            print('no obj fiound', ID)
+            return
 
     def save_obj(self, obj_dict):
         c = self._class

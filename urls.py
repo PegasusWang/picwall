@@ -25,6 +25,9 @@ url_patterns = [
     # admin
     url(r'/admin/?', admin.AdminMainHandler),
     url(r'/admin/login/?', admin.AdminLoginHandler),
+    url(r'/admin/img/solve', admin.ImgDelHandler),
+    url(r'/admin/girls/?', admin.AdminSiteHandler, dict(class_name='Girls')),
+    url(r'/admin/girls/(\w+-\w+)/?', admin.AdminSiteTagHandler),
 
     #url(r'/admin/(\w+)/?', admin.AdminHandler),
     #url(r'/admin/(\w+\/?\w+)/data.json', admin.LeanClassHandler),
