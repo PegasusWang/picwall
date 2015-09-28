@@ -47,7 +47,7 @@ http {
         client_max_body_size 50M;
 
         location ^~ /static/ {
-            root /home/wnn/program/picwall/static;
+            root /home/wnn/program/picwall/;
             if ($query_string) {
                 expires max;
             }
