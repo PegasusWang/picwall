@@ -54,7 +54,8 @@ class ImgDelHandler(AdminBaseHandler):
         img_ID = self.get_body_argument('img_id')
         l = LeanCloudApi(class_name)
         try:
-            l.del_by_ID(int(img_ID))
+            # l.del_by_ID(int(img_ID))
+            l.set_by_ID(int(img_ID))    # set img ID to 0
             d = {'msg': 'success', 'img_id': img_ID}
             self.write(d)
         except:
