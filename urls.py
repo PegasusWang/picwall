@@ -10,8 +10,6 @@ from handlers import user
 from tornado.web import url
 from lib.leancloud_api import LeanCloudApi
 
-class_name = 'Girls'
-
 
 url_patterns = [
     # url(r'/?', mako_test.ResizeHandler),
@@ -29,9 +27,6 @@ url_patterns = [
     url(r'/admin/girls/?', admin.AdminSiteHandler, dict(class_name='Girls')),
     url(r'/admin/girls/(\w+-\w+)/?', admin.AdminSiteTagHandler),
 
-    #url(r'/admin/(\w+)/?', admin.AdminHandler),
-    #url(r'/admin/(\w+\/?\w+)/data.json', admin.LeanClassHandler),
-
     # site boys
     url(r'/boys/?', site.SiteHandler, dict(class_name='Boys')),
     url(r'/boys/(\w+-\w+)/?', site.SiteTagHandler),
@@ -48,24 +43,8 @@ url_patterns = [
     url(r'/animals/?', site.SiteHandler, dict(class_name='Animals')),
     url(r'/animals/(\w+-\w+)/?', site.SiteTagHandler),
 
-
-
     # leancloud
     url(r'/([-\w+]+\/?)+/data.json', leancloud_handler.LeanClassHandler),
-    #url(r'/(\w+\/?\w+)/(\w+)?/data.json', leancloud_handler.LeanClassHandler),
-    #url(r'/(\w+\/?\w+-\w+)/(\w+)?/data.json', leancloud_handler.LeanClassHandler),
-
-
-    #url(r'/mako/?', mako_test.MakoHandler),
-    #url(r'/resize/?', mako_test.ResizeHandler),
-    #url(r'/tem/?', tem_test.TemHandler),
-
-
-
-    url(r'(\/?\w*)/data/data1.json', leancloud_handler.LeanHandler,
-        dict(class_name=class_name, leancloud_db=LeanCloudApi(class_name))),
-
-
 
     url(r'.*', base.PageNotFoundHandler),    # catch return 404 page
 ]
