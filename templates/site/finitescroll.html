@@ -8,7 +8,7 @@
 </head>
 <body>
 <div id="header">
-    <h1>no more data</h1>
+    <h1>finitescroll</h1>
 </div>
 <div id="container"></div>
 <div id="page-navigation" class="hide clear">
@@ -44,34 +44,12 @@ $('#container').waterfall({
     maxPage: 5,
     checkImagesLoaded: false,
     callbacks: {
-        
         loadingFinished: function($loading, isBeyondMaxPage) {
             if ( !isBeyondMaxPage ) {
                 $loading.fadeOut();
             } else {
                 $loading.hide();
                 $('#page-navigation').show();
-            }
-        },
-        renderData: function (data, dataType) {
-            var tpl,
-                template,
-                resultNum = data.total;
-                
-            if ( resultNum < 20) {
-                $('#container').waterfall('pause', function() {
-                    $('#waterfall-message').html('<p style="color:#666;">no more data...</p>')
-                    //alert('no more data');
-                });
-            }
-    
-            if ( dataType === 'json' ||  dataType === 'jsonp'  ) { // json or jsonp format
-                tpl = $('#waterfall-tpl').html();
-                template = Handlebars.compile(tpl);
-    
-                return template(data);
-            } else { // html format
-                return data;
             }
         }
     },

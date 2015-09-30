@@ -2,15 +2,20 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>min-max-columns</title>
+    <title>fix brick left or right</title>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/waterfall.css">
 </head>
 <body>
 <div id="header">
-    <h1>min-max-columns</h1>
+    <h1>fix brick left or right</h1>
 </div>
-<div id="container"></div>
+<div id="container">
+    <div class="item waterfall-item-fixed-left" style="height: 180px;  background: #2b8af8; color: #fff;">left</div>
+    <div class="item waterfall-item-fixed-right" style="height: 120px; background: #0293ab; color: #fff;">right</div>
+    <div class="item waterfall-item-fixed-left" style="height: 230px; background: #db561d; color: #fff;">left</div>
+    <div class="item waterfall-item-fixed-right" style="height: 170px;  background: #0d9c00; color: #fff;">right</div>
+</div>
 <script type="text/x-handlebars-template" id="waterfall-tpl">
 {{#result}}
     <div class="item">
@@ -27,11 +32,9 @@ $('#container').waterfall({
     colWidth: 222,  
     gutterWidth: 15,
     gutterHeight: 15,
-    minCol: 2,
-    maxCol: 4,
     checkImagesLoaded: false,
     path: function(page) {
-        return 'data/data3.json?page=' + page;
+        return 'data/data1.json?page=' + page;
     }
 });
 </script>
