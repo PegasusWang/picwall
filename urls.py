@@ -2,7 +2,6 @@
 # -*- coding:utf-8 -*-
 
 from handlers import base
-from handlers import mako_test
 from handlers import leancloud_handler
 from handlers import admin
 from handlers import site
@@ -12,7 +11,6 @@ from lib.leancloud_api import LeanCloudApi
 
 
 url_patterns = [
-    # url(r'/?', mako_test.ResizeHandler),
     url(r'/?', site.SiteHandler, dict(class_name='Girls')),
 
     url(r'/user/?', user.UserMainHandler),
