@@ -53,6 +53,7 @@ by the rightful owners (Ask me anything). Intended for mature audiences due to t
 配置好redis内存
 
 
+注意:修改了leancloudhandle的接口后,backend里边的update_redis也要相应修改
 
 todo：
 回到顶端按钮
@@ -62,3 +63,5 @@ robots.txt
 nginx配置防止盗链。
 写相册页面。
 写下载接口,对不同类别混图.
+
+
