@@ -56,6 +56,7 @@ by the rightful owners (Ask me anything). Intended for mature audiences due to t
 
 todo：
 回到顶端按钮
+微博分享按钮
 robots.txt
 更改使得site最多50页.首页无限制
 nginx配置防止盗链。

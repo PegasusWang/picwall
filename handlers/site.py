@@ -3,7 +3,7 @@
 
 from base import BaseHandler
 from tornado.web import addslash
-from tag_to_class import tag_to_class
+from _tag_to_class import tag_to_class
 
 
 class SiteHandler(BaseHandler):
