@@ -31,7 +31,8 @@ def update_redis_by_class(class_name):
 
         result = []
         for i in obj_list:
-            print i.get('ID')
+            img_ID = i.get('ID')
+            print(img_ID)
             img_url = i.get('File').url
             img_url = img_url + '?imageMogr2/thumbnail/%sx' % width
 
@@ -39,7 +40,7 @@ def update_redis_by_class(class_name):
             ori_height = i.get('height')
             height = width*ori_height/ori_width
 
-            each_res = {'image': img_url, 'width': width, 'height': height}
+            each_res = {'id': img_ID, 'image': img_url, 'width': width, 'height': height}
             result.append(each_res)
 
         res = {'total': page_num, 'result': result}
