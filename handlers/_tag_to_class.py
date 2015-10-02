@@ -18,7 +18,7 @@ tag_to_class = {
 
     # gif
     'gifs-funny': 'GifsFunny',
-    'gifs-kuso': 'GifKuso',
+    'gifs-kuso': 'GifsKuso',
     'gifs-other': 'GifsOther',
     'gifs-lol': 'GifsLol',
 

@@ -58,10 +58,10 @@ by the rightful owners (Ask me anything). Intended for mature audiences due to t
 todo：
 回到顶端按钮
 微博分享按钮
-robots.txt
 更改使得site最多50页.首页无限制
-nginx配置防止盗链。
-写相册页面。
 写下载接口,对不同类别混图.
-
-
+写微博app所有的图片管理,单独拷贝一个项目
+添加新的分类唯美，潮流，星空，壁纸
+注意:修改了leancloudhandle的接口后,backend里边的update_redis也要相应修改
+更改分类。
+写相册页面。下边加上原来连接,给每个类建立个字段

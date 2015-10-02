@@ -1,17 +1,16 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
-from handlers import base
-from handlers import leancloud_handler
-from handlers import admin
-from handlers import site
-from handlers import user
+from handlers import (
+    base, admin, site, user, show,
+    leancloud_handler,
+)
 from tornado.web import url
-from lib.leancloud_api import LeanCloudApi
 
 
 url_patterns = [
     url(r'/?', site.SiteHandler, dict(class_name='Girls')),
+    url(r'/([-\w]+/?)+/show/([\w_]+)/?', show.ShowHandler),
 
     url(r'/user/?', user.UserMainHandler),
     url(r'/user/login/?', user.UserLoginHandler),

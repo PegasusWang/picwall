@@ -34,13 +34,17 @@ def update_redis_by_class(class_name):
             img_ID = i.get('ID')
             print(img_ID)
             img_url = i.get('File').url
-            img_url = img_url + '?imageMogr2/thumbnail/%sx' % width
+            img_href = img_url.split('/')[-1].replace('.', '_')
+            if 'gif' in img_href.lower():
+                img_url = img_url + '?vframe/jpg/offset/1|imageMogr2/thumbnail/%sx/interlace/1' % width
+            else:
+                img_url = img_url + '?imageMogr2/thumbnail/%sx/interlace/1' % width
 
             ori_width = i.get('width')
             ori_height = i.get('height')
             height = width*ori_height/ori_width
 
-            each_res = {'id': img_ID, 'image': img_url, 'width': width, 'height': height}
+            each_res = {'href': img_href, 'id': img_ID, 'image': img_url, 'width': width, 'height': height}
             result.append(each_res)
 
         res = {'total': page_num, 'result': result}

@@ -1,10 +1,9 @@
-#!/usr/bin/env python
+!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 import _env
 import base64
 import random
-import time
 from tornado.web import RequestHandler
 from tornado.escape import json_encode
 from lib.encrypt_api import gen_uuid_32
@@ -44,15 +43,20 @@ class LeanClassHandler(RequestHandler):
 
             result = []
             for i in obj_list:
-
                 img_ID = i.get('ID')
                 img_url = i.get('File').url
-                img_url = img_url + '?imageMogr2/thumbnail/%sx' % width
+                img_href = img_url.split('/')[-1].replace('.', '_')
+                if 'gif' in img_href.lower():
+                    img_url = img_url + '?vframe/jpg/offset/1|imageMogr2/thumbnail/%sx/interlace/1' % width
+                else:
+                    img_url = img_url + '?imageMogr2/thumbnail/%sx/interlace/1' % width
+
+
                 ori_width = i.get('width')
                 ori_height = i.get('height')
                 try:
                     height = width*ori_height/ori_width
-                    each_res = {'id': img_ID, 'image': img_url, 'width': width, 'height': height}
+                    each_res = {'href': img_href, 'id': img_ID, 'image': img_url, 'width': width, 'height': height}
                 except TypeError:
                     each_res = random.choice(default_res)
 

@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+<title>今日图片-相框</title>
+<style type="text/css">
+body {
+    width: 100%;
+    height: 100%;
+    float: center;
+    margin: 0;
+    padding: 0;
+}
+body {
+    background: #eff0f2;
+}
+body:before {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: block;
+    margin: auto;
+    text-align: center;
+    text-shadow: -1px 1px 0 white;
+}
+/*body:after {*/
+.dot{
+    content: '';
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background: -webkit-radial-gradient(#555, #000);
+    background: radial-gradient(#555, #000);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.19), 0 3px 3px rgba(0, 0, 0, 0.23);
+}
+
+.scene {
+    margin: 0px auto;
+    top: 75px;
+    position: relative;*/
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    -webkit-animation: steps 0.6s steps(1, end) infinite;
+    animation: steps 0.6s steps(1, end) infinite;
+    border: 32px solid;
+    border-left-color: red;
+    border-left-color: #343232;
+    border-top-color: #000;
+    border-right-color: #1a1919;
+    border-bottom-color: #413e3e;
+}
+.scene:before,
+.scene:after {
+    content: '';
+    display: block;
+    width: 2px;
+    height: 94px;
+    background: #000;
+    position: absolute;
+    z-index: -1;
+    top: -145px;
+    left: 50%;
+    -webkit-transform: rotate(-45deg) translateY(50px) translateX(-50%);
+    -ms-transform: rotate(-45deg) translateY(50px) translateX(-50%);
+    transform: rotate(-45deg) translateY(50px) translateX(-50%);
+}
+.scene:after {
+    -webkit-transform: rotate(45deg) translateY(50px) translateX(-50%);
+    -ms-transform: rotate(45deg) translateY(50px) translateX(-50%);
+    transform: rotate(45deg) translateY(50px) translateX(-50%);
+}
+
+img {
+    width: 100%;
+    max-width: 100%;
+}
+</style>
+
+<script type="text/javascript" src="${static_url("js/libs/jquery/jquery.js")}"></script>
+<script type="text/javascript" src="${static_url("js/jquery.snipe.min.js")}"></script>
+
+    <script type="text/javascript">
+        $(function(){
+            $('#show').snipe({
+                bounds: [10,-10,-10,10]
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="dot">
+    </div>
+    <div class="scene">
+        <img id="show" src="${scale_src}" width="${width}" height="${height}" data-zoom="${src}"/>
+    </div>
+    <script>
+        var scene = document.getElementsByClassName('scene')[0];
+        scene.style.width = "${width}px";
+        scene.style.height = "${height}px";
+    </script>
+</body>
+
+</html>

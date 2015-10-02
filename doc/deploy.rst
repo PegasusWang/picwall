@@ -1,3 +1,7 @@
+克隆代码; 安装常用库；安装python库，安转nginx，redis。
+
+配置步骤：
+
 修改debug为false.
 
 it may be necessary to increase the number of open files per process (to avoid “Too many open files”-Error). To raise this limit (setting it to 50000 for example) you can use the ulimit command, modify /etc/security/limits.conf or setting minfds in your supervisord config.
