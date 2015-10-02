@@ -1,24 +1,17 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
+import _env
 import traceback
 from tornado.gen import coroutine
 from base import BaseHandler
-from tornado.web import addslash,  asynchronous
+from tornado.web import addslash
 from tornado.escape import json_decode
 from tornado.httpclient import AsyncHTTPClient
-from _tag_to_class import tag_to_class
-
+from config.img_config import Img
 
 KEY = 'IMGINFO'
-
-'''
-class ShowHandler(BaseHandler):
-    @addslash
-    def get(self):
-
-        self.render("/site/show.html")
-'''
+SCALE = Img.SCALE
 
 
 class ShowHandler(BaseHandler):
@@ -31,7 +24,7 @@ class ShowHandler(BaseHandler):
     def get(self, *args):
         img_id = args[-1]
         img_url = 'http://ac-0pdchyat.clouddn.com/' + img_id.replace('_', '.')
-        scale_img_url = img_url + '?imageMogr2/thumbnail/!80p/interlace/1'    # 80%
+        scale_img_url = img_url + ('?imageMogr2/thumbnail/!%dp/interlace/1' % int(SCALE*100))
         is_gif = True if 'gif' in img_id.lower() else False
         tpl = "/site/show_gif.html" if is_gif else "/site/show.html"
 
@@ -39,10 +32,10 @@ class ShowHandler(BaseHandler):
             img_info = self._redis.hget(KEY, img_id)    # value is width_height
             scale_width = int(img_info.split('_')[0])
             scale_height = int(img_info.split('_')[1])
+            print('from redis', img_id)
             self.render(tpl, scale_src=scale_img_url, src=img_url,
                         width=scale_width, height=scale_height)
         except:
-            pass
             img_info_url = img_url + '?imageInfo'
             http_client = AsyncHTTPClient()
             response = yield http_client.fetch(img_info_url)
@@ -55,11 +48,11 @@ class ShowHandler(BaseHandler):
                 scale_width, scale_height = int(img_width), int(img_height)
                 scale_img_url = img_url
             else:
-                scale_width, scale_height = int(img_width*0.8), int(img_height*0.8)
+                scale_width, scale_height = int(img_width*SCALE), int(img_height*SCALE)
 
             try:
                 self._redis.hset(KEY, img_id,
-                    str(scale_width)+'_'+str(scale_height))
+                                 str(scale_width)+'_'+str(scale_height))
             except:
                 traceback.print_exc()
                 pass

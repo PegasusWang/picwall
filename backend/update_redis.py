@@ -15,6 +15,8 @@ from redis import Redis
 from lib.leancloud_api import LeanCloudApi
 from tornado.escape import json_encode
 
+KEY = 'IMGINFO'
+SCALE = Img.SCALE
 r = Redis(redis_config.HOST, redis_config.PORT)
 page_num = Img.PAGE_NUM # number of pages you want to cache query sting in redis
 width = Img.WIDTH
@@ -34,6 +36,10 @@ def update_redis_by_class(class_name):
             img_ID = i.get('ID')
             print(img_ID)
             img_url = i.get('File').url
+            img_id = img_url.rsplit('/')[-1].replace('.', '_')
+
+            is_gif = True if 'gif' in img_url.lower() else False
+
             img_href = img_url.split('/')[-1].replace('.', '_')
             if 'gif' in img_href.lower():
                 img_url = img_url + '?vframe/jpg/offset/1|imageMogr2/thumbnail/%sx/interlace/1' % width
@@ -42,6 +48,14 @@ def update_redis_by_class(class_name):
 
             ori_width = i.get('width')
             ori_height = i.get('height')
+
+            if is_gif:
+                scale_width, scale_height = int(ori_width), int(ori_height)
+            else:
+                scale_width, scale_height = int(ori_width*SCALE), int(ori_height*SCALE)
+
+            r.hset(KEY, img_id, str(scale_width)+'_'+str(scale_height))
+
             height = width*ori_height/ori_width
 
             each_res = {'href': img_href, 'id': img_ID, 'image': img_url, 'width': width, 'height': height}
