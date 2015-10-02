@@ -27,7 +27,12 @@ def update_redis_by_class(class_name):
     l = LeanCloudApi(class_name)
     for page in range(1, page_num+1):
         time.sleep(0.3)
-        obj_list = l.get_skip_obj_list(page-1, limit_num=Img.LIMIT_NUM)
+        try:
+            obj_list = l.get_skip_obj_list(page-1, limit_num=Img.LIMIT_NUM)
+        except:
+            time.sleep(1)
+            obj_list = l.get_skip_obj_list(page-1, limit_num=Img.LIMIT_NUM)
+
         if not obj_list:
             return
 
