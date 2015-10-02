@@ -10,6 +10,7 @@ from tornado.web import url
 
 url_patterns = [
     url(r'/?', site.SiteHandler, dict(class_name='Girls')),
+    url(r'/show/([\w_]+)/?', show.ShowHandler),
     url(r'/([-\w]+/?)+/show/([\w_]+)/?', show.ShowHandler),
 
     url(r'/user/?', user.UserMainHandler),

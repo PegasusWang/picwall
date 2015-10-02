@@ -29,8 +29,7 @@ class ShowHandler(BaseHandler):
     @addslash
     @coroutine
     def get(self, *args):
-        class_name = args[0]
-        img_id = args[1]
+        img_id = args[-1]
         img_url = 'http://ac-0pdchyat.clouddn.com/' + img_id.replace('_', '.')
         scale_img_url = img_url + '?imageMogr2/thumbnail/!80p/interlace/1'    # 80%
         is_gif = True if 'gif' in img_id.lower() else False
