@@ -58,12 +58,17 @@ class LeanCloudApi(object):
         query.descending('ID')
         query.skip(skip_num*limit_num)
         query.limit(limit_num)
+
         try:
             res = query.find()
-            return res
         except:
+            time.sleep(0.5)
+            try:
+                res = query.find()
+            except:
+                res = []
             traceback.print_exc()
-            return []
+        return res
 
     def add_img_info(self, obj_id):
         query = self._query
