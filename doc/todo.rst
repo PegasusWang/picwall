@@ -6,9 +6,6 @@ bjfu 19740303 123456
 -异步查询。
 -redis缓存。hset classname page queryresult
 （定时更新脚本,限定每个类页面数，计算占用空间, redis设置conf)
--nginx处理静态文件。
--多进程启动tornado，配合nginx监听不同的端口。
--supervisor控制进程.
 
 程序优化：
 -容错。什么时候用if判断，什么时候用try、catch，哪些地方会出现异常。哪些地方需要用if。存入redis的数据是否是有效的。
@@ -18,7 +15,6 @@ bjfu 19740303 123456
 用户优化：
 -不同屏幕显示效果如何。手机版适配.
 -有没有部分图片没有显示出来。
--gif消耗大，考虑用缩略图。
 -有没有死链。是否带不带后/的域名都是可以访问的.
 -随意输入url会不会重定向?
 -404和500界面能用吗?
@@ -56,7 +52,6 @@ by the rightful owners (Ask me anything). Intended for mature audiences due to t
 注意:修改了leancloudhandle的接口后,backend里边的update_redis也要相应修改
 
 todo：
-回到顶端按钮
 微博分享按钮
 更改使得site最多50页.首页无限制
 写下载接口,对不同类别混图.
@@ -64,4 +59,4 @@ todo：
 添加新的分类唯美，潮流，星空，壁纸
 注意:修改了leancloudhandle的接口后,backend里边的update_redis也要相应修改
 更改分类。
-写相册页面。下边加上原来连接,给每个类建立个字段
+相册页面下边加上原来连接,给每个类建立个字段
