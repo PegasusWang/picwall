@@ -3,7 +3,7 @@ programs=tornado-8000,tornado-8001,tornado-8002,tornado-8003
 
 [program:tornado-8000]
 command=python /home/wnn/program/picwall/app.py --port=8000
-directory=/homw/wnn/program/picwall
+directory=/home/wnn/program/picwall
 user=root
 autorestart=true
 redirect_stderr=true
@@ -12,7 +12,7 @@ loglevel=info
 
 [program:tornado-8001]
 command=python /home/wnn/program/picwall/app.py --port=8001
-directory=/homw/wnn/program/picwall
+directory=/home/wnn/program/picwall
 user=root
 autorestart=true
 redirect_stderr=true
@@ -21,7 +21,7 @@ loglevel=info
 
 [program:tornado-8002]
 command=python /home/wnn/program/picwall/app.py --port=8002
-directory=/homw/wnn/program/picwall
+directory=/home/wnn/program/picwall
 user=root
 autorestart=true
 redirect_stderr=true
@@ -30,7 +30,7 @@ loglevel=info
 
 [program:tornado-8003]
 command=python /home/wnn/program/picwall/app.py --port=8003
-directory=/homw/wnn/program/picwall
+directory=/home/wnn/program/picwall
 user=root
 autorestart=true
 redirect_stderr=true

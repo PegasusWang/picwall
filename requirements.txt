@@ -6,3 +6,4 @@ redis
 tornado-redis
 simplejson
 requests
+jieba
