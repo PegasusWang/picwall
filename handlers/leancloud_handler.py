@@ -33,6 +33,7 @@ class LeanClassHandler(RequestHandler):
             res_b64 = base64.standard_b64encode(res_str)
             encrypt_str = uuid_str[:13] + res_b64 + uuid_str[:22]
             print 'from redis', page
+            self.set_header("Content-Type", "text/plain")
             self.write(encrypt_str)
 
         else:
@@ -71,6 +72,7 @@ class LeanClassHandler(RequestHandler):
                 pass
             res_b64 = base64.standard_b64encode(res_str)
             encrypt_str = uuid_str[:13] + res_b64 + uuid_str[:22]
+            self.set_header("Content-Type", "text/plain")
             self.write(encrypt_str)
 
 
@@ -132,6 +134,7 @@ class LeanHandler(RequestHandler):
                 pass
             res_b64 = base64.standard_b64encode(res_str)
             encrypt_str = uuid_str[:13] + res_b64 + uuid_str[:22]
+            self.set_header("Content-Type", "text/plain")
             self.write(encrypt_str)
 
 
