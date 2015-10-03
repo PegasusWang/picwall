@@ -76,8 +76,9 @@
         animationOptions: {
         },
         path: function(page) {
-        return '${class_name}/data.json?page=' + page;
-        }
+            return '/api/data.json?page=' + page;
+        },
+        params: {class_name: "${class_name}"}
     });
     </script>
 </%block>

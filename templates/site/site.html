@@ -10,7 +10,7 @@
     <%text>
     {{#result}}
         <div class="item">
-        <a href="show/{{href}}" target="_blank">
+        <a href="/show/{{href}}" target="_blank">
             <img id="{{id}}" src="{{image}}" width="{{width}}" height="{{height}}" />
         </a>
         </div>
@@ -37,8 +37,9 @@
         animationOptions: {
         },
         path: function(page) {
-        return '${class_name}/data.json?page=' + page;
-        }
+            return '/api/data.json?page=' + page;
+        },
+        params: {class_name: "${class_name}"}
     });
     </script>
 </%block>

@@ -9,11 +9,11 @@ from tornado.web import url
 
 
 url_patterns = [
-    url(r'/([-\w]+\/?)+/data.json', leancloud_handler.LeanClassHandler),
+    # leancloud api
+    url(r'/api/data.json', leancloud_handler.LeanClassHandler),
 
     url(r'/?', site.SiteHandler, dict(class_name='Girls')),
     url(r'/show/([\w_]+)/?', show.ShowHandler),
-    url(r'/([-\w]+/?)+/show/([\w_]+)/?', show.ShowHandler),
 
     url(r'/user/?', user.UserMainHandler),
     url(r'/user/login/?', user.UserLoginHandler),
@@ -42,8 +42,6 @@ url_patterns = [
     # site animals
     url(r'/animals/?', site.SiteHandler, dict(class_name='Animals')),
     url(r'/animals/(\w+-\w+)/?', site.SiteTagHandler),
-
-    # leancloud
 
     url(r'.*', base.PageNotFoundHandler),    # catch return 404 page
 ]

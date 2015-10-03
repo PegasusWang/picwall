@@ -10,13 +10,15 @@ from lib.encrypt_api import gen_uuid_32
 from lib.leancloud_api import LeanCloudApi
 from config.img_config import Img
 
+
 class LeanClassHandler(RequestHandler):
     @property
     def _redis(self):
         return self.application._redis
 
     def get(self, *args):
-        class_name = args[-1]
+        class_name = self.get_query_argument('class_name')
+        print(class_name)
         width = Img.WIDTH
         uuid_str = gen_uuid_32()
         key = class_name + ':' + str(width)
