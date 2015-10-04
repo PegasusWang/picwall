@@ -1,108 +1,125 @@
-<!doctype html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <title>finitescroll</title>
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/waterfall.css">
-</head>
-<body>
-<div id="header">
-    <h1>finitescroll</h1>
-</div>
-<div id="container"></div>
-<div id="page-navigation" class="hide clear">
-    <a href="#" class="disabled page-navigation-prev" onclick="prev(this)" title="上一页">«上一页</a>
-    <a href="#" class="page-navigation-next" onclick="next(this)" data-page="2" title="下一页">下一页»</a>
-</div><!-- #page-navigation -->
+<%inherit file="/base/waterfall.html"/>
 
+<%block name="title">
+    <title>每日图片-美女图,帅哥图,宠物图,搞笑图,动态图gif</title>
+</%block>
 
-<script type="text/x-handlebars-template" id="waterfall-tpl">
-{{#result}}
-    <div class="item">
-        <img src="{{image}}" width="{{width}}" height="{{height}}" />
+<%block name="waterfall">
+    <div id="container"></div>
+    <div id="page-navigation" class="hide clear">
+        <a href="#" class="disabled page-navigation-prev" onclick="prev(this)" title="上一页">«上一页</a>
+        <a href="#" class="page-navigation-next" onclick="next(this)" data-page="2" title="下一页">下一页»</a>
     </div>
-{{/result}}
-</script>
-<script src="js/libs/jquery/jquery.js"></script>
-<script src="js/libs/handlebars/handlebars.js"></script>
-<script src="js/waterfall.min.js"></script>
-<script>
-$('#container').waterfall({
-    itemCls: 'item',
-    colWidth: 222,
-    gutterWidth: 15,
-    gutterHeight: 15,
-    maxPage: 3,
-    checkImagesLoaded: false,
-    callbacks: {
-        loadingFinished: function($loading, isBeyondMaxPage) {
-            if ( !isBeyondMaxPage ) {
-                $loading.fadeOut();
-            } else {
-                $loading.hide();
-                $('#page-navigation').show();
+
+    <script type="text/x-handlebars-template" id="waterfall-tpl">
+    <%text>
+    {{#result}}
+        <div class="item">
+        <a href="/show/{{href}}" target="_blank">
+            <img id="{{id}}" src="{{image}}" width="{{width}}" height="{{height}}" />
+        </a>
+        </div>
+    {{/result}}
+    </%text>
+    </script>
+
+    <script src="${static_url("js/libs/jquery/jquery.js")}"></script>
+    <script src="${static_url("js/libs/handlebars/handlebars.js")}"></script>
+    <script src="${static_url("js/libs/jquery.easing.js")}"></script>
+    <script src="${static_url("js/waterfall.js")}"></script>
+
+    <script type="text/javascript">
+    var getUrlParameter = function getUrlParameter(sParam) {
+        var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+            sURLVariables = sPageURL.split('&'),
+            sParameterName,
+            i;
+
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1] === undefined ? true : sParameterName[1];
             }
         }
-    },
-    path: function(page) {
-        return 'data/data' + page + '.json';
-    }
-});
-</script>
+    };
 
-<script type="text/javascript">
-var getUrlParameter = function getUrlParameter(sParam) {
-    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
-        sURLVariables = sPageURL.split('&'),
-        sParameterName,
-        i;
 
-    for (i = 0; i < sURLVariables.length; i++) {
-        sParameterName = sURLVariables[i].split('=');
-
-        if (sParameterName[0] === sParam) {
-            return sParameterName[1] === undefined ? true : sParameterName[1];
+    function prev(obj) {
+        var p = getUrlParameter('p');
+        if (p === undefined) {
+            obj.setAttribute('href', '?&p=1');
+        } else {
+            p = parseInt(p) - 1;
+            if (p <= 0)
+                p = 1;
+            obj.setAttribute('href', '?&p=' + p.toString());
         }
     }
-};
 
-
-function prev(obj) {
-    var p = getUrlParameter('p');
-    if (p === undefined) {
-        obj.setAttribute('href', '?p=1');
-    } else {
-        p = parseInt(p) - 1;
-        if (p <= 0)
-            p = 1;
-        obj.setAttribute('href', '?p=' + p.toString());
+    function next(obj) {
+        var p = getUrlParameter('p');
+        if (p === undefined) {
+            obj.setAttribute('href', '?&p=2');
+        } else {
+            p = parseInt(p) + 1;
+            obj.setAttribute('href', '?&p=' + p.toString());
+        }
     }
-}
+    </script>
+    <script>
+    $('#container').waterfall({
+        itemCls: 'item',
+        colWidth: 400,
+        maxCol: 4,
+        maxPage: ${max_page},
+        gutterWidth: 15,
+        gutterHeight: 15,
+        checkImagesLoaded: false,
+        isAnimated: true,
+        isFadeIn: true,
+        dataType: 'text',
+        animationOptions: {
+        },
+        callbacks: {
+            loadingFinished: function($loading, isBeyondMaxPage) {
+                if ( !isBeyondMaxPage ) {
+                    $loading.fadeOut();
+                } else {
+                    $loading.hide();
+                    $('#page-navigation').show();
+                }
+            },
+            renderData: function (data, dataType) {
+                var tpl,
+                    template,
+                    resultNum = data.total;
+                    
+                if ( resultNum < 20) {
+                    $('#container').waterfall('pause', function() {
+                        $('#waterfall-message').html('<p style="color:#666;">亲，加载完啦~~~</p>')
+                    });
+                }
+        
+                if (dataType==='json' || dataType==='jsonp' || dataType==='text') {
+                    tpl = $('#waterfall-tpl').html();
+                    template = Handlebars.compile(tpl);
+        
+                    return template(data);
+                } else { // html format
+                    return data;
+                }
+            }
+        },
+        path: function(page) {
+            var p = getUrlParameter('p');
+            if (p === undefined)
+                p = '1';
+            return '/api/data.json?p=' + p + '&page=' + page;
+        },
+        params: {class_name: "${class_name}"}
+    });
+    </script>
 
-function next(obj) {
-    var p = getUrlParameter('p');
-    if (p === undefined) {
-        obj.setAttribute('href', '?p=2');
-    } else {
-        p = parseInt(p) + 1;
-        obj.setAttribute('href', '?p=' + p.toString());
-    }
-}
 
-</script>
-
-<script type="text/javascript">
-var _gaq = _gaq || [];
-_gaq.push(['_setAccount', 'UA-1245097-16']);
-_gaq.push(['_trackPageview']);
-_gaq.push(['_trackPageLoadTime']);
-(function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = 'https://ssl.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-})();
-</script>
-</body>
-</html>
-
+</%block>

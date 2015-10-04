@@ -88,8 +88,7 @@
                  * @param {String} dataType , "json", "jsonp", "html"
                  */
                 renderData: function (data, dataType) {
-                    var tpl,
-                        template;
+                    var tpl, template;
 
                     if (dataType==='json' || dataType==='jsonp' || dataType==='text'  ) { // json or jsonp format
                         tpl = $('#waterfall-tpl').html();
@@ -476,7 +475,7 @@
                 headers: headers,
                 dataType: dataType,
                 success: function(data) {
-                    data = MyEncrypt.decode(data);    // add decrypt
+                    data = MyEncrypt.decode(data);
                     data = JSON.parse(data);
                     self._handleResponse(data, callback);
                     self.options.state.isDuringAjax = false;

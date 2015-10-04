@@ -17,15 +17,21 @@ class LeanClassHandler(RequestHandler):
         return self.application._redis
 
     def get(self, *args):
-        class_name = self.get_query_argument('class_name')
-        print(class_name)
+        class_name = self.get_query_argument('class_name', 'Girls')
+        page = int(self.get_query_argument('page', 1))
+        try:
+            p = int(self.get_query_argument('p', 1))
+        except:
+            p = 1
+        p = 1 if p <= 0 else p
+        # page = (p-1) * maxPage + page; maxPage defined in waterfall.js
+        page = (int(p)-1) * Img.MAXPAGE + page
+        if (page <= 0) or (page > Img.PAGE_NUM*2):
+            page = 1
+
         width = Img.WIDTH
         uuid_str = gen_uuid_32()
         key = class_name + ':' + str(width)
-        try:
-            page = int(self.get_query_argument('page'))
-        except:
-            page = 1
 
         try:
             res_str = self._redis.hget(key, page)
@@ -54,7 +60,6 @@ class LeanClassHandler(RequestHandler):
                 else:
                     img_url = img_url + '?imageMogr2/thumbnail/%sx/interlace/1' % width
 
-
                 ori_width = i.get('width')
                 ori_height = i.get('height')
                 try:
@@ -65,7 +70,10 @@ class LeanClassHandler(RequestHandler):
 
                 result.append(each_res)
 
-            res = {'total': limit_num, 'result': result}
+            if result:
+                res = {'total': limit_num, 'result': result}
+            else:
+                res = {'total': 0}
             res_str = json_encode(res)
 
             try:
@@ -76,6 +84,7 @@ class LeanClassHandler(RequestHandler):
             encrypt_str = uuid_str[:13] + res_b64 + uuid_str[:22]
             self.set_header("Content-Type", "text/plain")
             self.write(encrypt_str)
+
 
 
 class LeanHandler(RequestHandler):
