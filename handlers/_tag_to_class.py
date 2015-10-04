@@ -9,6 +9,8 @@ tag_to_class = {
     'girls-japan': 'Japan',
     'girls-korean': 'Korean',
     'girls-china': 'China',
+    'girls-western': 'Western',
+    'girls-asia': 'Asia',
     'girls-leg': 'Leg',
     'girls-cos': 'Cos',
     'girls-gif': 'GirlsGif',
