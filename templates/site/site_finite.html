@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>finitescroll</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/waterfall.css">
+</head>
+<body>
+<div id="header">
+    <h1>finitescroll</h1>
+</div>
+<div id="container"></div>
+<div id="page-navigation" class="hide clear">
+    <a href="#" class="disabled page-navigation-prev" onclick="prev(this)" title="上一页">«上一页</a>
+    <a href="#" class="page-navigation-next" onclick="next(this)" data-page="2" title="下一页">下一页»</a>
+</div><!-- #page-navigation -->
+
+
+<script type="text/x-handlebars-template" id="waterfall-tpl">
+{{#result}}
+    <div class="item">
+        <img src="{{image}}" width="{{width}}" height="{{height}}" />
+    </div>
+{{/result}}
+</script>
+<script src="js/libs/jquery/jquery.js"></script>
+<script src="js/libs/handlebars/handlebars.js"></script>
+<script src="js/waterfall.min.js"></script>
+<script>
+$('#container').waterfall({
+    itemCls: 'item',
+    colWidth: 222,
+    gutterWidth: 15,
+    gutterHeight: 15,
+    maxPage: 3,
+    checkImagesLoaded: false,
+    callbacks: {
+        loadingFinished: function($loading, isBeyondMaxPage) {
+            if ( !isBeyondMaxPage ) {
+                $loading.fadeOut();
+            } else {
+                $loading.hide();
+                $('#page-navigation').show();
+            }
+        }
+    },
+    path: function(page) {
+        return 'data/data' + page + '.json';
+    }
+});
+</script>
+
+<script type="text/javascript">
+var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : sParameterName[1];
+        }
+    }
+};
+
+
+function prev(obj) {
+    var p = getUrlParameter('p');
+    if (p === undefined) {
+        obj.setAttribute('href', '?p=1');
+    } else {
+        p = parseInt(p) - 1;
+        if (p <= 0)
+            p = 1;
+        obj.setAttribute('href', '?p=' + p.toString());
+    }
+}
+
+function next(obj) {
+    var p = getUrlParameter('p');
+    if (p === undefined) {
+        obj.setAttribute('href', '?p=2');
+    } else {
+        p = parseInt(p) + 1;
+        obj.setAttribute('href', '?p=' + p.toString());
+    }
+}
+
+</script>
+
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-1245097-16']);
+_gaq.push(['_trackPageview']);
+_gaq.push(['_trackPageLoadTime']);
+(function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = 'https://ssl.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+</body>
+</html>
+
