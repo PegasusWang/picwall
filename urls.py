@@ -43,5 +43,8 @@ url_patterns = [
     url(r'/animals/?', site.SiteHandler, dict(class_name='Animals')),
     url(r'/animals/(\w+-\w+)/?', site.SiteTagHandler),
 
+    # site nature
+    url(r'/nature/?', site.SiteHandler, dict(class_name='Nature')),
+
     url(r'.*', base.PageNotFoundHandler),    # catch return 404 page
 ]

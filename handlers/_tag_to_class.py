@@ -26,5 +26,8 @@ tag_to_class = {
     'gifs-lol': 'GifsLol',
 
     # animails
+    'animals-gif': 'AnimalsGif',
     'animals-catdog': 'AnimalsCatdog',
+
+    # nature
 }
