@@ -56,7 +56,7 @@ class LeanClassHandler(RequestHandler):
                 img_url = i.get('File').url
                 img_href = img_url.split('/')[-1].replace('.', '_')
                 if 'gif' in img_href.lower():
-                    img_url = img_url + '?vframe/jpg/offset/1|imageMogr2/thumbnail/%sx/interlace/1' % width
+                    img_url = img_url + '?vframe/jpg/offset/0|imageMogr2/thumbnail/%sx/interlace/1' % width
                 else:
                     img_url = img_url + '?imageMogr2/thumbnail/%sx/interlace/1' % width
 
