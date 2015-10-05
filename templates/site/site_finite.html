@@ -1,7 +1,7 @@
 <%inherit file="/base/waterfall.html"/>
 
 <%block name="title">
-    <title>每日图片-美女图,帅哥图,宠物图,搞笑图,动态图gif</title>
+    <title>今日图片-美女图,帅哥图,宠物图,搞笑图,动态图gif</title>
 </%block>
 
 <%block name="waterfall">
@@ -94,17 +94,17 @@
                 var tpl,
                     template,
                     resultNum = data.total;
-                    
-                if ( resultNum < 20) {
+
+                if ( resultNum < 10) {
                     $('#container').waterfall('pause', function() {
                         $('#waterfall-message').html('<p style="color:#666;">亲，加载完啦~~~</p>')
                     });
                 }
-        
+
                 if (dataType==='json' || dataType==='jsonp' || dataType==='text') {
                     tpl = $('#waterfall-tpl').html();
                     template = Handlebars.compile(tpl);
-        
+
                     return template(data);
                 } else { // html format
                     return data;
