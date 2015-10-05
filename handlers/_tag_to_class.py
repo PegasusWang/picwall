@@ -16,7 +16,8 @@ tag_to_class = {
     'girls-gif': 'GirlsGif',
 
     # boys
-    'boys-korean': 'Boys',
+    'boys-gif': 'BoysKorean',
+    'boys-asia': 'BoysAsia',
 
     # gif
     'gifs-funny': 'GifsFunny',
