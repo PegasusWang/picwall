@@ -1,4 +1,4 @@
 picwall
 用来练手的。
 一个没有节操的网站。
-http://tupian.today
+http://tupian.today or http://jinritu.com
