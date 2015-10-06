@@ -80,6 +80,18 @@ img {
     width: 100%;
     max-width: 100%;
 }
+#back {
+    bottom: 0;
+    position: fixed;
+    margin: 0 auto;
+    position:relative;
+    text-align:center;
+}
+a{ color:#2c2a2a }
+
+#count{
+    display:none;
+}
 </style>
 
 <script type="text/javascript" src="${static_url("js/libs/jquery/jquery.js")}"></script>
@@ -99,7 +111,11 @@ img {
     </div>
     <div class="scene">
         <img id="show" src="${scale_src}" width="${width}" height="${height}" data-zoom="${src}"/>
+        <div id="back"><a href="http://tupian.today">&copy;今日图片(tupian.today)</a></div>
+        <div id='count'>
+        <script src="http://s95.cnzz.com/z_stat.php?id=1256502181&web_id=1256502181" language="JavaScript"></script>
     </div>
+
     <script>
         var scene = document.getElementsByClassName('scene')[0];
         scene.style.width = "${width}px";
