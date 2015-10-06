@@ -7,3 +7,4 @@ tornado-redis
 simplejson
 requests
 jieba
+beautifulsoup4

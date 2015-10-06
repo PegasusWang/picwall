@@ -60,3 +60,8 @@ todo：
 注意:修改了leancloudhandle的接口后,backend里边的update_redis也要相应修改
 更改分类。
 相册页面下边加上原来连接,给每个类建立个字段
+
+
+
+SEO:
+把其他所有域名都用dnspod转发到一个显性转发.
