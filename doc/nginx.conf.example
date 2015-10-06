@@ -46,6 +46,12 @@ http {
         # Allow file uploads
         client_max_body_size 50M;
 
+        server_name www.jinritu.com jinritu.com tupian.today www.tupian.today;
+        if ($host != 'jinritu.com' ) {
+            rewrite ^/(.*)$ http://jinritu.com/$1 permanent;
+
+        }
+
         location ^~ /static/ {
             root /home/wnn/program/picwall/;
             if ($query_string) {
