@@ -28,6 +28,8 @@ tag_to_class = {
     # animails
     'animals-gif': 'AnimalsGif',
     'animals-catdog': 'AnimalsCatdog',
+    'animals-cat': 'Cat',
+    'animals-dog': 'Dog',
 
     # nature
 }
