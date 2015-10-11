@@ -1,0 +1,64 @@
+@charset "gb2312";
+/* CSS Document */
+html{ font-size:12px;}
+body{ background-color:#eee;}
+body,div,ul,li,img,p{ margin:0; padding:0;}
+ul,li{ list-style:none;}
+a{ text-decoration:none;}
+img{ border:none;}
+.clear{ clear:both;}
+
+.headerbar{ height:54px; background-color:#111111;}
+.header{ /*width:300px; min-width:320px;*/ margin:0 auto;/* padding:0 10px;*/}
+.logo{ float:left; margin-top:10px; margin-left:10px;}
+.logo a img{ width:116px; height:33px;}
+.btn_bar{ float:right; margin-top:8px; margin-right:10px;}
+.btn_bar a{ display:block;  width:96px; padding-left:12px; height:38px; line-height:38px; font-size:14px; color:#111111; background:url(../images/btn_cate_big.png) no-repeat;}
+
+#allgirl{ /*width:298px;*/ width:100%; margin:0 auto;  position:absolute; top:-45px; z-index:10; display:none;}
+#allgirl .contentbox{border:1px solid #E0E0E0; border-radius:5px; margin:0 5px; background-color:#FBFBFB;}
+#allgirl ul{ padding:6px 10px; font-size:14px; color:#666; }
+#allgirl ul li{ height:36px; line-height:36px; border-bottom:1px solid #E0E0E0; cursor:pointer;}
+#allgirl ul li div{ float:left;}
+#allgirl ul li span{ background:url(../images/icons.png) no-repeat; display:block; width:16px; height:16px; overflow:hidden; float:right; margin-top:10px; text-indent:-9999px;}
+#allgirl ul li.on span{background:url(../images/icons.png) no-repeat 0px -16px;}
+.allbtn{ text-align:center; padding:12px 0px 22px;}
+.allbtn a{ display:inline-block; width:90px; height:30px; text-align:center; line-height:30px; color:#666; font-size:14px; background-color:#EEE; border:1px solid #e1e1e1; boder-radius:2px; margin-left:20px;}
+
+.listmain{ /*width:300px;min-width:320px;*/ padding:10px 0px 0px; margin:0 auto; overflow:hidden;}
+.listmain ul{ /*width:310px;*/display:table; font-size:12px;display: flex; flex-wrap: wrap;/*display: -webkit-flex;-webkit-flex-wrap: wrap;*/}
+.listmain ul li{ display:inline-block;
+	float:none;
+	display:flex;
+	align-items:stretch;
+	/*background-color:red;*/
+	/*min-width:322px;*/
+	/*vertical-align:bottom;*/
+	vertical-align:bottom;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-ms-box-sizing:border-box;
+	-o-box-sizing:border-box;
+	box-sizing:border-box;/* float:left;margin-right:10px;*/ width:49.9%; overflow:hidden; text-align:center; /*width:143px;*/ margin-bottom:10px; /*display: -webkit-flex;align-items: stretch;-webkit-box-align: stretch;*/ padding:0 5px; padding-bottom:5px;}
+.listmain ul li img{ width:100%; border-radius: 5px 5px 0px 0px;}
+.listmain ul li div.libox{align-items:stretch; background-color:#fff; border-radius: 5px; /* margin:0 5px;*/ /*padding:0 5px;*/ height:auto;  width:100%; /*border:1px solid #E0E0E0;*/ box-shadow: 0px 1px 3px rgba(0, 0, 0, .25); }
+/*.listmain ul li div.widthbox{ width:100%;}*/
+.listmain ul li a p{ color:#333; height:30px; line-height:30px; /*width:138px;*/ text-align:left; overflow:hidden; padding-top:5px; padding-left:5px;}
+.listmain ul li div.info{ height:20px; line-height:20px; padding:0 5px; color:#999; padding-bottom:10px; overflow:hidden;/* width:100%;*/}
+.listmain ul li div.info span{ float:left; margin-left:5px}
+.listmain ul li div.info i,.listmain ul li div.info b{ font-style:normal; float:right; color:#666; display:inline-block; height:16px; /*overflow:hidden;*/ padding-left:20px; margin-left:3px;}
+.listmain ul li div.info i{ background:url(../images/icons.png) no-repeat 0 -31px;}
+.listmain ul li div.info b{ font-weight:normal; background:url(../images/icons.png) no-repeat 0 -47px;  padding-left:17px; /*width:28px;*/ }
+
+.morebtn{ display:block;/* width:298px;*/border-radius: 5px;box-shadow: 0px 1px 3px rgba(0, 0, 0, .25); height:34px; line-height:34px; background-color:#fff; border:1px solid #ccc; text-align:center; margin:0px 5px; font-size:14px; color:#666666; margin-bottom:10px; }
+.morebtn i{ background:url(../images/icons.png) no-repeat 0 -64px; display:inline-block; height:16px; width:16px; position:relative; top:2px;}
+
+.footer{ /*width:300px;*/ margin:0 12px; padding:5px 0px; color:#666;}
+.footer p{ text-align:center; line-height:24px;}
+.footer p a{ color:#666;}
+.footer p em{ font-style:normal; padding:0 4px;}
+.footbar{ background-color:#444; height:10px;}
+
+.m_adv{  text-align:center; margin:0 5px; margin-top:10px; border-radius:5px; overflow:hidden;}
+
+
