@@ -1,44 +1,44 @@
-@charset "gb2312";
-/* CSS Document */
-html{ font-size:12px;}
-body{ background-color:#eee;}
-body,div,ul,li,img,p,h1{ margin:0; padding:0;}
-ul,li{ list-style:none;}
-a{ text-decoration:none;}
-img{ border:none;}
-.clear{ clear:both;}
-
-.headerbar{ height:54px; background-color:#444;}
-.header{ /*width:300px;*/ margin:0 auto; padding:0 10px;}
-.logo{ float:left; margin-top:10px;}
-.logo a img{ width:116px; height:33px;}
-.btn_bar{ float:right; margin-top:8px;}
-.btn_bar a{ display:block;  width:96px; padding-left:12px; height:38px; line-height:38px; font-size:14px; color:#444; background:url(../images/btn_cate_big.png) no-repeat;}
-
-#allgirl{ width:100%; margin:0 auto; position:absolute; top:-45px; z-index:10; display:none;}
-#allgirl .contentbox{border:1px solid #E0E0E0; border-radius:5px; margin:0 5px; background-color:#FBFBFB;}
-#allgirl ul{ padding:6px 10px; font-size:14px; color:#666;}
-#allgirl ul li{ height:36px; line-height:36px; border-bottom:1px solid #E0E0E0; cursor:pointer;}
-#allgirl ul li span{ background:url(../images/icons.png) no-repeat; display:block; width:16px; height:16px; overflow:hidden; float:right; margin-top:10px; text-indent:-9999px;}
-#allgirl ul li.on span{background:url(../images/icons.png) no-repeat 0px -16px;}
-.allbtn{ text-align:center; padding:12px 0px 22px;}
-.allbtn a{ display:inline-block; width:90px; height:30px; text-align:center; line-height:30px; color:#666; font-size:14px; background-color:#EEE; border:1px solid #e1e1e1; boder-radius:2px;}
-
-.arcmain{ /*width:300px;*/ padding:10px; margin:0 auto; overflow:hidden;}
-.arcmain ul li{ margin-bottom:10px;}
-.arcmain ul li img{ width:100%;}
-.arcmain h1{ font-size:12px; font-weight:normal; padding:0 10px; background-color:#f6f6f6; border:1px solid #e0e0e0; height:38px; line-height:38px; margin-bottom:10px;}
-.arcmain h1 span{ float:right; color:#666;}
-.arcmain h1 b{ font-weight:normal; background:url(../images/icons.png) no-repeat 0 -48px; width:16px; height:16px; padding-right:4px; display:inline-block; position:relative; top:3px; z-index:1; overflow:hidden;}
-
-.nextbtn{ color:#DF57AA;}
-
-.footer{ /*width:298px; border:1px solid #E0E0E0;*/ margin:0 10px; margin-bottom:10px; padding:5px 10px; color:#666; background-color:#eee;  border-radius:5px;}
-.footer p{ text-align:center; line-height:24px;}
-.footer p a{ color:#666;}
-.footer p em{ font-style:normal; padding:0 4px;}
-.footbar{ background-color:#444; height:10px;}
-
-.m_adv{  text-align:center; margin-top:10px; border-radius:5px; overflow:hidden;}
-.clear{clear:both;font-size:1px;width:100%;height:0;visibility:hidden;margin-top:0px!important;*margin-top:-1px;line-height:0;}
-
+@charset "gb2312";
+/* CSS Document */
+html{ font-size:12px;}
+body{ background-color:#eee;}
+body,div,ul,li,img,p,h1{ margin:0; padding:0;}
+ul,li{ list-style:none;}
+a{ text-decoration:none;}
+img{ border:none;}
+.clear{ clear:both;}
+
+.headerbar{ height:54px; background-color:#444;}
+.header{ /*width:300px;*/ margin:0 auto; padding:0 10px;}
+.logo{ float:left; margin-top:10px;}
+.logo a img{ width:116px; height:33px;}
+.btn_bar{ float:right; margin-top:8px;}
+.btn_bar a{ display:block;  width:96px; padding-left:12px; height:38px; line-height:38px; font-size:14px; color:#444; background:url(../images/btn_cate_big.png) no-repeat;}
+
+#allgirl{ width:100%; margin:0 auto; position:absolute; top:-45px; z-index:10; display:none;}
+#allgirl .contentbox{border:1px solid #E0E0E0; border-radius:5px; margin:0 5px; background-color:#FBFBFB;}
+#allgirl ul{ padding:6px 10px; font-size:14px; color:#666;}
+#allgirl ul li{ height:36px; line-height:36px; border-bottom:1px solid #E0E0E0; cursor:pointer;}
+#allgirl ul li span{ background:url(../images/icons.png) no-repeat; display:block; width:16px; height:16px; overflow:hidden; float:right; margin-top:10px; text-indent:-9999px;}
+#allgirl ul li.on span{background:url(../images/icons.png) no-repeat 0px -16px;}
+.allbtn{ text-align:center; padding:12px 0px 22px;}
+.allbtn a{ display:inline-block; width:90px; height:30px; text-align:center; line-height:30px; color:#666; font-size:14px; background-color:#EEE; border:1px solid #e1e1e1; boder-radius:2px;}
+
+.arcmain{ /*width:300px;*/ padding:10px; margin:0 auto; overflow:hidden;}
+.arcmain ul li{ margin-bottom:10px;}
+.arcmain ul li img{ width:100%;}
+.arcmain h1{ font-size:12px; font-weight:normal; padding:0 10px; background-color:#f6f6f6; border:1px solid #e0e0e0; height:38px; line-height:38px; margin-bottom:10px;}
+.arcmain h1 span{ float:right; color:#666;}
+.arcmain h1 b{ font-weight:normal; background:url(../images/icons.png) no-repeat 0 -48px; width:16px; height:16px; padding-right:4px; display:inline-block; position:relative; top:3px; z-index:1; overflow:hidden;}
+
+.nextbtn{ color:#DF57AA;}
+
+.footer{ /*width:298px; border:1px solid #E0E0E0;*/ margin:0 10px; margin-bottom:10px; padding:5px 10px; color:#666; background-color:#eee;  border-radius:5px;}
+.footer p{ text-align:center; line-height:24px;}
+.footer p a{ color:#666;}
+.footer p em{ font-style:normal; padding:0 4px;}
+.footbar{ background-color:#444; height:10px;}
+
+.m_adv{  text-align:center; margin-top:10px; border-radius:5px; overflow:hidden;}
+.clear{clear:both;font-size:1px;width:100%;height:0;visibility:hidden;margin-top:0px!important;*margin-top:-1px;line-height:0;}
+

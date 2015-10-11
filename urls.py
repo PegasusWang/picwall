@@ -3,7 +3,7 @@
 
 from handlers import (
     base, admin, site, user, show,
-    leancloud_handler,
+    leancloud_handler, mobile,
 )
 from tornado.web import url
 
@@ -52,6 +52,10 @@ url_patterns = [
 
     # site nature
     url(r'/nature/?', site.SiteHandler, dict(class_name='Nature')),
+
+
+    # for mobile
+    url(r'/mobile/?', mobile.SiteHandler, dict(class_name='Girls')),
 
     url(r'.*', base.PageNotFoundHandler),    # catch return 404 page
 ]
