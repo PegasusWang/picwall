@@ -91,9 +91,6 @@ img {
 }
 a{ color:#2c2a2a }
 
-#count{
-    display:none;
-}
 </style>
 
 <script type="text/javascript" src="${static_url("js/libs/jquery/jquery.js")}"></script>
@@ -106,6 +103,17 @@ a{ color:#2c2a2a }
             });
         });
     </script>
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?b3da3f7cb9865e4936ecf6f681828811";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
 </head>
 
 <body>
@@ -114,9 +122,6 @@ a{ color:#2c2a2a }
     <div class="scene">
         <img id="show" src="${scale_src}" width="${width}" height="${height}" data-zoom="${src}"/>
         <div id="back"><a href="http://jinritu.com">&copy;今日图片(jinritu.com)</a></div>
-        <div id='count'>
-        <script src="http://s95.cnzz.com/z_stat.php?id=1256502181&web_id=1256502181" language="JavaScript"></script>
-        </div>
     </div>
 
     <script>
