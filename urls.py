@@ -26,6 +26,13 @@ url_patterns = [
     url(r'/admin/img/solve', admin.ImgDelHandler),
     url(r'/admin/girls/?', admin.AdminSiteHandler, dict(class_name='Girls')),
     url(r'/admin/girls/(\w+-\w+)/?', admin.AdminSiteTagHandler),
+    url(r'/admin/boys/?', admin.AdminSiteHandler, dict(class_name='Boys')),
+    url(r'/admin/boys/(\w+-\w+)/?', admin.AdminSiteTagHandler),
+    url(r'/admin/gifs/?', admin.AdminSiteHandler, dict(class_name='Gifs')),
+    url(r'/admin/gifs/(\w+-\w+)/?', admin.AdminSiteTagHandler),
+    url(r'/admin/animals/?', admin.AdminSiteHandler, dict(class_name='Animals')),
+    url(r'/admin/animals/(\w+-\w+)/?', admin.AdminSiteTagHandler),
+    url(r'/admin/nature/?', admin.AdminSiteHandler, dict(class_name='Nature')),
 
     # site boys
     url(r'/boys/?', site.SiteHandler, dict(class_name='Boys')),

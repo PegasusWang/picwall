@@ -52,16 +52,16 @@ by the rightful owners (Ask me anything). Intended for mature audiences due to t
 注意:修改了leancloudhandle的接口后,backend里边的update_redis也要相应修改
 
 todo：
-微博分享按钮
-更改使得site最多50页.首页无限制
 写下载接口,对不同类别混图.
 写微博app所有的图片管理,单独拷贝一个项目
-添加新的分类唯美，潮流，星空，壁纸
+添加新的分类，潮流，星空，壁纸
 注意:修改了leancloudhandle的接口后,backend里边的update_redis也要相应修改
-更改分类。
-相册页面下边加上原来连接,给每个类建立个字段
+相册页面下边加上来源,给每个类建立个字段
+手机页面
 
 
 
 SEO:
-把其他所有域名都用dnspod转发到一个显性转发.
+把其他所有域名都用dnspod转发到一个显性转发.或者使用nginx配置下可以301转发.
+加友链找合作，友链页面。
+sendcloud接口
