@@ -7,6 +7,7 @@ from tornado.web import addslash
 from config.img_config import Img
 from _tag_to_class import tag_to_class
 
+MOBILE_PAGE = Img.MOBILE_PAGE
 
 class SiteHandler(BaseHandler):
     def initialize(self, class_name):
@@ -17,7 +18,7 @@ class SiteHandler(BaseHandler):
     def get(self):
         # self.render("/site/site.html", class_name=self._class_name)
         self.render("/mobile/mobile.html", class_name=self._class_name,
-                    max_page=Img.MAXPAGE)
+                    max_page=MOBILE_PAGE)
 
 
 class SiteTagHandler(BaseHandler):
@@ -26,4 +27,4 @@ class SiteTagHandler(BaseHandler):
         #self.render("/site/site.html", class_name=tag_to_class[class_name])
         self.render("/mobile/mobile.html",
                     class_name=tag_to_class[class_name],
-                    max_page=Img.MAXPAGE)
+                    max_page=MOBILE_PAGE)

@@ -14,6 +14,7 @@ url_patterns = [
 
     url(r'/?', site.SiteHandler, dict(class_name='Girls')),
     url(r'/show/([\w_]+)/?', show.ShowHandler),
+    url(r'/mobile/show/([\w_]+)/?', show.MobileShowHandler),
 
     url(r'/user/?', user.UserMainHandler),
     url(r'/user/login/?', user.UserLoginHandler),
@@ -56,6 +57,24 @@ url_patterns = [
 
     # for mobile
     url(r'/mobile/?', mobile.SiteHandler, dict(class_name='Girls')),
+
+    url(r'/mobile/boys/?', mobile.SiteHandler, dict(class_name='Boys')),
+    url(r'/mobile/boys/(\w+-\w+)/?', mobile.SiteTagHandler),
+
+    # site girls
+    url(r'/mobile/girls/?', mobile.SiteHandler, dict(class_name='Girls')),
+    url(r'/mobile/girls/(\w+-\w+)/?', mobile.SiteTagHandler),
+
+    # site gifs
+    url(r'/mobile/gifs/?', mobile.SiteHandler, dict(class_name='Gifs')),
+    url(r'/mobile/gifs/(\w+-\w+)/?', mobile.SiteTagHandler),
+
+    # site animals
+    url(r'/mobile/animals/?', mobile.SiteHandler, dict(class_name='Animals')),
+    url(r'/mobile/animals/(\w+-\w+)/?', mobile.SiteTagHandler),
+
+    # site nature
+    url(r'/mobile/nature/?', mobile.SiteHandler, dict(class_name='Nature')),
 
     url(r'.*', base.PageNotFoundHandler),    # catch return 404 page
 ]

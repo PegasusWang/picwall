@@ -10,7 +10,7 @@ from tornado.escape import json_decode
 from tornado.httpclient import AsyncHTTPClient
 from config.img_config import Img
 
-KEY = 'IMGINFO'
+KEY = 'MOBILE'
 SCALE = Img.SCALE
 
 
@@ -59,3 +59,16 @@ class ShowHandler(BaseHandler):
 
             self.render(tpl, scale_src=scale_img_url, src=img_url,
                         width=scale_width, height=scale_height)
+
+
+class MobileShowHandler(BaseHandler):
+    @property
+    def _redis(self):
+        return self.application._redis
+
+    @addslash
+    @coroutine
+    def get(self, *args):
+        img_id = args[-1]
+        img_url = 'http://ac-0pdchyat.clouddn.com/' + img_id.replace('_', '.')
+        self.render("/mobile/site.html", src=img_url)

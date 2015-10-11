@@ -17,6 +17,8 @@ class LeanClassHandler(RequestHandler):
         return self.application._redis
 
     def get(self, *args):
+        is_mobile = self.get_query_argument('is_mobile', False)
+        max_page = Img.MOBILE_PAGE if is_mobile else Img.MAXPAGE
         class_name = self.get_query_argument('class_name', 'Girls')
         page = int(self.get_query_argument('page', 1))
         try:
@@ -25,10 +27,11 @@ class LeanClassHandler(RequestHandler):
             p = 1
         p = 1 if p <= 0 else p
         # page = (p-1) * maxPage + page; maxPage defined in waterfall.js
-        page = (int(p)-1) * Img.MAXPAGE + page
+        page = (int(p)-1) * max_page + page
         if (page <= 0) or (page > Img.PAGE_NUM*2):
             page = 1
 
+        print(page)
         width = Img.WIDTH
         uuid_str = gen_uuid_32()
         key = class_name + ':' + str(width)
