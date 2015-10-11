@@ -31,7 +31,6 @@ class LeanClassHandler(RequestHandler):
         if (page <= 0) or (page > Img.PAGE_NUM*2):
             page = 1
 
-        print(page)
         width = Img.WIDTH
         uuid_str = gen_uuid_32()
         key = class_name + ':' + str(width)

@@ -69,6 +69,7 @@ class MobileShowHandler(BaseHandler):
     @addslash
     @coroutine
     def get(self, *args):
-        img_id = args[-1]
         img_url = 'http://ac-0pdchyat.clouddn.com/' + img_id.replace('_', '.')
+        img_url = img_url + '?imageMogr2/thumbnail/%sx/interlace/1' % width
+        print img_url
         self.render("/mobile/site.html", src=img_url)
