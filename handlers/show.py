@@ -67,7 +67,6 @@ class MobileShowHandler(BaseHandler):
         return self.application._redis
 
     @addslash
-    @coroutine
     def get(self, *args):
         img_id = args[-1]
         img_url = 'http://ac-0pdchyat.clouddn.com/' + img_id.replace('_', '.')

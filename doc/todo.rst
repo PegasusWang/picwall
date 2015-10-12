@@ -53,15 +53,16 @@ by the rightful owners (Ask me anything). Intended for mature audiences due to t
 
 todo：
 写下载接口,对不同类别混图.
-写微博app所有的图片管理,单独拷贝一个项目
-添加新的分类，潮流，星空，壁纸
+添加新的分类，潮流，，壁纸,高清
 注意:修改了leancloudhandle的接口后,backend里边的update_redis也要相应修改
 相册页面下边加上来源,给每个类建立个字段
 手机页面
-
+写声明页面，写上github链接,版权信息等。下一步规划,合作开发,代码疑问
+整理app类别，去掉不用的图片分类，节省空间和费用。
 
 
 SEO:
 把其他所有域名都用dnspod转发到一个显性转发.或者使用nginx配置下可以301转发.
 加友链找合作，友链页面。
 sendcloud接口
+按照百度统计建议,图片信息需要alt信息，给每个字段加上alt字段，大致给个分类信息.
