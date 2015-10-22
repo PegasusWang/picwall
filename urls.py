@@ -12,7 +12,8 @@ url_patterns = [
     # leancloud api
     url(r'/api/data.json', leancloud_handler.LeanClassHandler),
 
-    url(r'/?', site.SiteHandler, dict(class_name='Girls')),
+    url(r'/?', site.SiteHandler, dict(class_name='Nature')),
+    #url(r'/?', site.SiteHandler, dict(class_name='Girls')),
     url(r'/show/([\w_]+)/?', show.ShowHandler),
     url(r'/mobile/show/([\w_]+)/?', show.MobileShowHandler),
 
